@@ -6,7 +6,7 @@ For information about version 2 releases and compatibility between version 2 and
 
 ## Current Release
 
-The current released version for the *Loop* app is 3.4.1. The dates and contents for releases are summarized below in reverse chronological order (so newest release information comes first).
+The current released version for the *Loop* app is 3.4.3. The dates and contents for releases are summarized below in reverse chronological order (so newest release information comes first).
 
 ### What Version Do I Have?
 
@@ -22,6 +22,52 @@ Release information is always found on the [*GitHub*&nbsp;_<span translate="no">
 Additional information including links is found here, but be aware that updates to&nbsp;_<span translate="no">LoopDocs</span>_&nbsp;may take some time after a new release comes out.
 
 ## Loop 3 Version History
+
+### Loop v3.4.3
+
+*Loop* v3.4.3 was released on 6 October 2024.
+
+This was a minor update to the *Loop* code with a few bug fixes and some capability extensions.
+
+!!! important "Please use the `main` branch"
+    Some people have become complacent about using the `dev` branch to get the latest updates. This is a good time to switch to the `main` branch.
+    
+    New revision will be landing in the `dev` branch soon. Don't be surprised - stick with `main` and version 3.4.3 until the changes have been tested.
+
+* [Link to release notes for Loop 3.4.3](https://github.com/LoopKit/Loop/releases/tag/v3.4.3){: target="_blank" }
+
+These updates were incorporated in this release. The pull request for each modification is linked in parentheses.
+
+* CGMBLEKit: Add ONE to the display name ([194](https://github.com/LoopKit/CGMBLEKit/pull/194){: target="_blank" })
+
+* G7SensorKit: Add ONE+ to the display name ([28](https://github.com/LoopKit/G7SensorKit/pull/28){: target="_blank" })
+
+* LibreTransmitter: 
+    * support the newer libre 2 plus european sensors ([14](https://github.com/LoopKit/LibreTransmitter/pull/14){: target="_blank" })
+    * fix: Prevent notification from sending if it isnt enabled ([15](https://github.com/LoopKit/LibreTransmitter/pull/15){: target="_blank" })
+    * increase build speed for Xcode 16 ([16](https://github.com/LoopKit/LibreTransmitter/pull/16){: target="_blank" })
+
+* LoopKit:
+    * Prevent app crash while moving presets ([540](https://github.com/LoopKit/LoopKit/pull/540){: target="_blank" })
+    * fix locale for CarbEntry decimal separator ([546](https://github.com/LoopKit/LoopKit/pull/546){: target="_blank" })
+    * Improve the visibility of the options to select ([549](https://github.com/LoopKit/LoopKit/pull/549){: target="_blank" })
+
+* Several fixes for OmniBLE (DASH), OmniKit (Eros)
+    * update_pump_manager ([125](https://github.com/LoopKit/OmniBLE/pull/125){: target="_blank" }, [36](https://github.com/LoopKit/OmniKit/pull/36){: target="_blank" })
+    * fix/bogus_suspend_msg ([126](https://github.com/LoopKit/OmniBLE/pull/126){: target="_blank" }, [37](https://github.com/LoopKit/OmniKit/pull/37){: target="_blank" })
+    * podAlreadyPaired-fix ([127](https://github.com/LoopKit/OmniBLE/pull/127){: target="_blank" }, [38](https://github.com/LoopKit/OmniKit/pull/38){: target="_blank" })
+    * fix/deactivate-sideways-pull ([128](https://github.com/LoopKit/OmniBLE/pull/128){: target="_blank" }, [39](https://github.com/LoopKit/OmniKit/pull/39){: target="_blank" })
+    * increase build speed for Xcode 16 ([131](https://github.com/LoopKit/OmniBLE/pull/131){: target="_blank" }, [40](https://github.com/LoopKit/OmniKit/pull/40){: target="_blank" })
+
+The Browser Build method was updated to use `Fastlane version 2.223.1`. This change ([208](https://github.com/LoopKit/LoopWorkspace/pull/208){: target="_blank" }) fixes a build error reported by several folks across the Open Source app community. This was also added to LoopWorkspace `dev` branch ([207](https://github.com/LoopKit/LoopWorkspace/pull/207){: target="_blank" }).
+
+### Loop v3.4.2
+
+*Loop* v3.4.2 was released on 5 October 2024.
+
+This was a patch that fixed errors with the expiration date for the Mac-Xcode build method for Xcode 16. No other changes were made. Because Browser Builders all use Xcode 15.4, there was no problem with their expiration date reporting.
+
+* [Link to release notes for Loop 3.4.2](https://github.com/LoopKit/Loop/releases/tag/v3.4.2){: target="_blank" }
 
 ### Loop v3.4.1
 
@@ -180,10 +226,15 @@ For example:
 
 ## Remove Apps with Shared App Group
 
-The storage of data with Loop 3 is not backward compatible. In other words, if you attempt to build Loop 2.2.x (or FreeAPS) on a phone which has been upgraded to Loop 3, you will not be able to run that app. You can successfully build the app, which will overwrite Loop 3 on the phone, but the app will crash and you will not be able to Loop.
+There are a number of Open Source apps which use the Loop App Group to share data.
 
-At this point, you can restore your Loop 3 build on your phone and continue using Loop 3 or you delete all apps on your phone with a shared app group. This list includes Loop, FreeAPS, FreeAPS X, iAPS, xDrip4iOS, Glucose-Direct, and the g5 Transmitter Reset app.
+One consequence of this is that if you delete one of those apps, there may be saved information on the phone that is **not** discarded. Normally this is not a problem, but sometimes you really want to wipe out all the stored information.
 
-If you tried to delete "all" the apps and still have something causing an issue; you can follow the directions to [Review Provisioning Profiles](https://www.loopandlearn.org/loop-expiration-date){: target="_blank" } and then delete the profiles for all the apps by using the - sign. 
+If you are in a situation where you want to completely wipe all data from your phone for any of these apps which use the Loop App Group, you might need to delete all of them:
 
-You do not need to delete LoopFollow, so if you use LoopFollow - do not delete that provisioning profile.
+* Active Apps: *`Loop`*, *`xDrip4iOS`*, *`Glucose-Direct`*, *`iAPS`*
+* Old Apps that might be hanging around: *`FreeAPS`*, *`FreeAPS X`* and the *`G5 Transmitter Reset`* app
+
+These apps either have their own App Group or do not use an App Group and do not need to be deleted:
+
+* *`LoopFollow`*, *`LoopCaregiver`*, *`Trio`*
