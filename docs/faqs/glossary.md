@@ -158,6 +158,8 @@ When Google Translate is selected:
 
 **<span translate="no">Monterey</span>**&nbsp; (Monterey): operating system for Mac, macOS 12.x
 
+**<span translate="no">MPC</span>**&nbsp; (MPC): model predictive control; the type of control algorithm used by Loop
+
 **<span translate="no">NFC</span>**&nbsp; (NFC): Near-Field Communication is used for scanning devices such as Libre sensors
 
 **<span translate="no">Nightscout</span>**&nbsp; (Nightscout): a personal website used to view your glucose and diabetes management data, `Loop` can upload to `Nightscout`
@@ -210,7 +212,7 @@ When Google Translate is selected:
 
 **<span translate="no">GH_PAT</span>**&nbsp; (GH_PAT): One of 6 Secrets: Generated with your GitHub account; set it to never expire
 
-**<span translate="no">MATCH_PASSWORD</span>**&nbsp; (MATCH_PASSWORD): One of 6 Secrets: password you make up but must save and cannot change without deleting the Match-Secrets repository
+**<span translate="no">MATCH_PASSWORD</span>**&nbsp; (MATCH_PASSWORD): One of 6 Secrets: Git repo encryption passphrase, used to encrypt the Match-Secrets repository when it is created. You must save and use the same MATCH_PASSWORD for every repository if you build multiple apps.
 
 **<span translate="no">SHA-1</span>**&nbsp; (SHA-1): Secure Hash Algorithm 1; used to generate an alphanumeric code for commits in git (github)
 
