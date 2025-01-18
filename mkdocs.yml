@@ -1,5 +1,6 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 site_name: LoopDocs
+site_url: https://loopkit.github.io/loopdocs/
 
 theme:
     name: material
@@ -77,7 +78,6 @@ markdown_extensions:
         toc_depth: 3
         title: Headers on this Page
 extra_javascript:
-    - https://polyfill.io/v3/polyfill.min.js?features=es6
     - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 plugins:
