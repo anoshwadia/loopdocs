@@ -6,8 +6,10 @@
 
 > Regardless of build method, this is an **update** and will install over your existing app; your **settings are maintained including your current CGM and Pump.**
 
+**For most, the *Loop* app is configured for automatic build, so you only need to come to this page if the automatic build failed.**
+
 ???+ info "Time Estimate (click to open/close)"
-    Build the *Loop* App
+    Manually update and build the *Loop* App
 
     - 5 min: Check *Apple* account status
     - Check if you need to renew certificates (once a year only)
@@ -21,6 +23,7 @@
 
     * 5 min: Clear out expired certificates
     * 5 min: Generate new certificates
+    > When Loop 3.6.0 is released, certificate renewal will be automatic once you [Add Variable](prepare-fork.md#add-variable){: target="_blank" }
 
     One Time: Complete the information for the Digital Service Act Compliance
 
@@ -32,7 +35,6 @@
 
     Most users will start at [How to Update or Rebuild](#how-to-update-or-rebuild):
 
-    * If currently using verion 3.2.3 or earlier, there are manual steps included to update to 3.4
     * If currently using verion 3.4.0 or later, builds are automatic but you still need to do some actions:
         * Your *Apple Developer* account must be active
         * All agreements must be signed for your *Apple Developer* account
@@ -114,6 +116,8 @@ Digital Service Act Compliance
 ## Renew Certificate
 
 > This is Step 2 of 6 - it is only needed once a year - you should get an email from Apple 30 days before your `Distribution Certificate` expires. (Don't worry if you did not see the email.)
+
+> If you have not added the `Variable` `ENABLE_NUKE_CERTS`, do it now. See [Add Variable](prepare-fork.md#add-variable){: target="_blank" }. Once `Loop 3.6.0` is released, your fork is updated and you set up that variable, you can skip this step - it will be automatic.
 
 **Apps in TestFlight are not affected when a certificate expires or is revoked.**
 
@@ -222,95 +226,6 @@ The bullets below show typical messages when you are building the `main` branch.
 
 > This is Step 4 of 6 - this is always required.
 
-### Update from 3.2.x to 3.4
-
-For the update from 3.2.x to 3.4, you must do more than "just" build. If you skip this step - the build will fail.
-
-* The `Identifier` for the "`widget`" changed from "`SmallStatusWidget`" to the more descriptive "`LoopWidgetExtension`"
-
-> If you built version 3.3.0 (the `dev branch` before release of version 3.4) or newer, you can skip ahead to [Build the App](#build-the-app).
-
-You will (1) run [`Add Identifiers`](#add-identifiers), (2) [add the `App Group`](#add-app-group-to-new-identifier) to the new identifier, (3) run [`Create Certificates`](#create-certificates) and then (4) run [`Build Loop`](#build-the-app).
-
-#### Add Identifiers
-
-In your fork of LoopWorkspace:
-
-* Run the Action: `Add Identifier`
-* Wait for it to succeed
-
-??? tip "Detailed instructions for `Add Identifier` (Click to open/close)"
-    Refer to the graphic below for the numbered steps:
-
-    1. Click on the `Actions` tab of your <code>LoopWorkspace</code> repository
-    1. On the left side, click on 2. <code>Add Identifiers</code>
-    1. On the right side, click `Run Workflow` to show a dropdown menu
-        * You will see your default branch (typically this is `main`)
-    1. Tap the green button that says `Run workflow`.
-
-        ![add identifiers using github actions](img/action-02-add-identifiers.svg){width="700"}
-        {align="center"}
-
-    The `Add Identifiers` &nbsp;<span class=notranslate>Action</span>&nbsp; should succeed or fail in a few minutes. Do not continue to the next step until this one succeeds.
-
-    * If you see the green check (:octicons-check-circle-fill-16:{: .passed })  continue to the next section
-    * If you see the red `X` (:octicons-x-circle-fill-16:{: .failed }):
-        * [Action: Add Identifiers Errors](bb-errors.md#action-add-identifiers-errors){: target="_blank" } tells you what to search for in the file
-        * Resolve the error and repeat `Add Identifiers`
-
-#### Add `App Group` to New `Identifier`
-
-Open the [Certificates, Identifiers & Profiles: Identifiers List](https://developer.apple.com/account/resources/identifiers/list){: target="_blank" } page.
-
-Click on the "`LoopWidgetExtension`" identifier to open the `Edit Your App ID Configuration` screen.
-
-| `NAME` | `IDENTIFIER` |
-|-------|------------|
-| `Loop Widget Extension` | `com.TEAMID.loopkit.Loop.LoopWidgetExtension` |
-
-The graphic below has numbered steps that match these directions:
-
-1. Looking at the `App Services` column, scroll down to the `App Groups` row and ensure the check box (under the `Capabilities column`) for `App Groups` is checked
-2. If the word `Configure` shows up, tap on it
-    * This opens the `App Group Assignment` screen
-    * If it said `Edit` instead of `Configure` - you can click to confirm you have the correct App Group but won't need to continue or save if it is correct
-3. Check the box by `Loop App Group` that uses your `TEAMID` in `group.com.TEAMID.loopkit.LoopGroup`
-    * Note that if you previously built with Xcode, the name may be different, i.e., `XC group com TEAMID loopkit LoopGroup`
-4. Tap `Continue`
-5. Tap `Save`
-
-![graphic showing selection of the correct App Group](img/update-identifier-loop-3-4.png){width="700"}
-{align="center"}
-
-If you did not need to make changes, the `Save` button will not be active.
-
-* Tap on the `< All Identifiers` link at the top left
-
-The full list of Identifiers should be displayed again.
-
-!!! note "Other Identifiers"
-    All other identifiers should be already set up.
-
-    * If they are not, refer to [Configure to Use Browser: Add App Group to Identifiers](prepare-app.md#add-app-group-to-identifiers){: target="_blank" }
-
-#### Create Certificates
-
-You must run the action `Create Certificates` again because the `Identifiers` were updated. Wait for this to succeed before trying to build.
-
-???+ tip "Detailed instructions (Click to open/close)"
-    Refer to the graphic below for the numbered steps:
-
-    1. Click on the "<code>Actions</code>" tab of your <code>LoopWorkspace</code> repository
-    1. On the left side, click on "`Create Certificates`"
-    1. On the right side, click "`Run Workflow`" to show a dropdown menu
-        * You will see your default branch (typically `main`)
-    1. Tap the green button that says "`Run workflow`".
-
-        ![create certificates using github actions](img/action-03-create-certs.svg){width="700"}
-        {align="center"}
-
-    1. Wait a minute or two for the action to finish
-
 #### Build the App
 
 Refer to graphic below as you follow the steps to build the *Loop* app.
@@ -328,7 +243,9 @@ Refer to graphic below as you follow the steps to build the *Loop* app.
 
 #### What if the Build Fails
 
-If a new release is announced at [Current Release](../version/releases.md#current-release){: target="_blank" }, look to see if there are instructions about extra steps required with the release. ([Updating from 3.2.3 to 3.4.x](#update-from-32x-to-34) requires extra steps described above.)
+If a new release is announced at [Current Release](../version/releases.md#current-release){: target="_blank" }, look to see if there are instructions about extra steps required with the release. 
+
+> When `Loop 3.6.0` is released, if you customized your Loop app, you may need to discard your customization and manually sync your `fork`. Check out the [Ahead and Behind](#ahead-and-behind) instructions.
 
 If you are using the dev branch, the update steps are the same, but review information on this page: [Build Loop dev with Browser](build-dev-browser.md){: target="_blank" }.
 
@@ -443,6 +360,8 @@ If your `Personal Access Token` has expired or has an expiration date, you can r
 !!! tip "Update new GH_PAT to <code>Secrets</code>"
     After you get your new token, immediately add it to your <code>Secrets</code> for any app you build with this method. You don't have to rebuild the app, but it's a good idea to at least run `Action 1. Validate Secrets` for each repository to make sure you did not make a mistake.
 
+    This might be a good time to [Switch to a GitHub Organization](prepare-fork.md#switch-to-a-github-organization){: target="_blank" }.
+
 You can regenerate your *GitHub* `Personal Access Token` at any time by clicking on the link below. (it will open in a new browser tab.)
 
 * [Link to access your *GitHub* Personal Access Token](https://github.com/settings/tokens){: target="_blank" }
@@ -478,17 +397,17 @@ The next step is to update GH_PAT in your <code>Secrets</code>. (If you build ot
 
 ### Update <code>Secrets</code>
 
-This example is for updating GH_PAT in the <code>Secrets</code> for your `repository`, but the same method can be applied when changing any of the <code>Secrets</code>.
+This example is for updating GH_PAT in the <code>Secrets</code> for your `repository`, but the same method can be applied when changing any of the <code>Secrets</code>. It uses a personal account, instead of an organization. So it shows changing the `Secret` for a specific repository and would need to be repeated for every repository you use. This might be a good time to [Switch to a GitHub Organization](prepare-fork.md#switch-to-a-github-organization){: target="_blank" }.
 
 Open the `repository` for which you will update <code>Secrets</code>. On the far right is a Settings selection. If you don't see Settings (if last item on row is Insights), then you are **not** on your `fork` or you need to sign in to your *GitHub* account. You should see `username/LoopWorkspace` with `forked` from `LoopKit/LoopWorkspace` underneath.
 
 Refer to the GIF for help. There are 3 frames.
 
-![screen showing repository secrets list](img/update-secret-gh-pat.gif){width="500"}
+![screen showing secrets list](img/update-secret-gh-pat.gif){width="500"}
 {align="center"}
 
 1. Tap on Settings, then scroll down until you see `Secrets and variables` on the left side and click on the drop down indicator to display `Actions`.
-1. Keep scrolling on the same screen, past the `Action secrets / New repository secret` row, until you see the list of your current <code>Secrets</code>. 
+1. Keep scrolling on the same screen, past the `Action secrets / New secret` row, until you see the list of your current <code>Secrets</code>.
 1. Click on the GH_PAT, tap on the pencil and enter the new token in the form. Click on Update Secret to complete the action.
 
 Scroll all the way to the top of the screen and tap on your LoopWorkspace link. Then follow the [How to Update or Rebuild](#how-to-update-or-rebuild) instructions to start a new build.
