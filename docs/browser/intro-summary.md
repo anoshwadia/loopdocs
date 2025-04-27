@@ -43,7 +43,7 @@
         * [Create your version of *Loop* in `App Store` (personal use only, not for distribution)](prepare-app.md#create-loop-app-in-app-store-connect){: target="_blank" }
         * [Set up `Internal TestFlight Group for the App`](tf-users.md#testflight-overview){: target="_blank" }
     * *GitHub*:
-        * [`Action: 3. Create Certificates`](certs.md#create-certificates){: target="_blank" }
+        * Action: 3. Create Certificates is included in Build Action with `Loop 3.6.0`
         * [`Action: 4. Build Loop`](build-yml.md#build-the-loop-app){: target="_blank" }
     * Phone: [Install the *Loop* app using the *TestFlight* app](phone-install.md){: target="_blank" }
 
@@ -87,6 +87,8 @@ Complete instructions are found at this link for those comfortable with using *G
 If you prefer watching your instructions, there is a narrated video of each step needed to build using a browser. This video was created for version 3.2.x and some steps have been simplified with version 3.4.x.
 
 * [How to Build the *Loop* App With a Web Browser](https://www.youtube.com/watch?v=kiu5ho0MTW8){: target="_blank" }
+
+> Do not decide to uncheck the box for Near Field Communications in the Identifer for `Loop` - that is required to build version 3.4.x and newer.
 
 Click in the comments for a full index of topics.  If you have issues with a particular section, use the index to advance to the relevant part of the video. Subtitles are in English. You can choose a different language but the automatic translation feature may provide translations that are not completely accurate.
 

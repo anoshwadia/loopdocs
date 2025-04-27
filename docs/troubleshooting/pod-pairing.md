@@ -16,17 +16,6 @@ The instructions from Insulet say fill with U-100 insulin. That is the strength 
 !!! tip "Inject slowly"
     Some users are able to get the pods to beep with smaller amounts by very slowly injecting the insulin.
 
-## Verbose Message, Hard to Interpret
-
-This is only seen with DASH pods. Sometimes the communication error happens at a very low level and by the time the error message works its way up to the display, it seems to go on for a long time and may not make sense to the typical looper.
-
-If you see a Pairing exception message similar to the one shown in the graphic below, you probably just need to toggle Bluetooth on the phone.
-
-![bluetooth error](img/pod-error-toggle-bluetooth.png ){width="300"}
-{align="center"}
-
-Still not working, read through the [Why do pod pairings fail?](#why-do-pod-pairings-fail) section.
-
 ## The app crashed after pairing started and before cannula insertion
 
 Sometimes the *Loop* app will crash while a new pod is being setup. This is rare but can happen. There are several parts to the setup process:
@@ -51,18 +40,6 @@ There are initial **pairing** steps: exchange of encryption keys, assign the pod
         * Fill a new pod and pair the new pod
         * Once the new pod is operating, be sure to go to the first pod and disable the sound - it will continue beeping until it starts to scream: [What do you do to stop a screaming pod?](../faqs/omnipod-faqs.md#what-do-you-do-to-stop-a-screaming-pod){: target="_blank" }
 
-### Behavior for Version 3.2.x and earlier
-
-For version 3.2.x and earlier, the pod needed to actually begin priming before an interruption occurred or the pod could not be recovered. However, in this case, the user was always directed to the Insert Cannula page whether priming completed or not.
-
-1. Wait for the clicking to stop
-    * It takes a full minute for the pod to finish priming once it starts
-    * If the crash occurs while the pod is still priming - it is best to wait 30 seconds after clicks stop before reopening the app
-1. As soon as you resume the app, it will inform you that you did not complete the process
-    * If you did not wait, you might be taken to the Insert Cannula screen before the pod is ready
-    * Wait 30 seconds after clicking (priming) stops before attempting to insert the cannula
-    * Note - it is not a fatal error to try to insert too soon - you will just be informed that the pod is not in the correct state - wait for priming to finish and then retry
-1. In most cases, the cannula will insert as expected and you can use the pod
 
 ## Why do pod pairings fail?
 

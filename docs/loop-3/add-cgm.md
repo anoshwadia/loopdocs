@@ -52,7 +52,12 @@ Some people use Dexcom Share to feed their remote services. There have been outa
 
 This is the reason why there's a comment under each CGM below to select Upload Readings.
 
-![graphic showing upload readings selection](img/cgm-upload-readings.jpg){width="350"}
+This setting is **off by default** so if you want to ensure you have CGM data in Tidepool, for example, enable this option.
+
+* Tap on the CGM pill in the top left corner of Loop
+* Scroll down and tap the **Upload Readings** toggle under **CONFIGURATION**
+
+![Toggle for Upload Readings in CGM Settings](img/cgm-upload-readings.jpg){width="350"}
 {align="center"}
 
 ### Dexcom G5, G6, ONE
@@ -183,7 +188,7 @@ In addition to the risks of missing data, if the internet is not reliable, you m
     
     _Sensors that can be added to Nightscout via other apps include Dexcom, some Libre, and some Medtronic sensors. Please refer to [Nightscout Docs: Configure your Uploader](https://nightscout.github.io/uploader/setup/){: target="_blank" }._
     
-    There are third-party apps that bring Libre data to your Loop phone. Cuustomization instructions are provided at the `Loop and Learn` website: [Libre Support for Loop 3.2.x](https://www.loopandlearn.org/custom-code/#add-cgm-browser){: target="_blank" } that explain how to modify Loop 3 to use one of those apps for Browser Build. The Mac instructions are found on the same page. Please use these steps to get a version of Loop that does not rely on internet access to work.
+    There are third-party apps that bring some models of Libre data to your Loop phone. Customization instructions are provided at the `Loop and Learn` website: [New CGM and Pump](https://www.loopandlearn.org/custom-code-add-cgm-pump/){: target="_blank" } that explain how to modify Loop to add a CGM or Pump that is not part of the released `Loop` code.
     
     It is suggested that you use Open Loop during warmup until the new sensor begins to provide reasonable data. This is especially important with European Libre 2 using a direct Bluetooth connection.
     
