@@ -104,7 +104,9 @@ If you want to try to solve it yourself, refer back to these section in the docu
 
 ### New Builder: Add Identifiers Error
 
-If you succeeded with Validate Secrets, this should also succeed. If it does not, please [ask a mentor for help](#where-to-get-help-with-browser-build).
+If you succeeded with Validate Secrets, this should also succeed. If it does not, please skip ahead to [Error: `missing a required attribute`](#error-missing-a-required-attribute).
+
+Do not hesitate to [ask a mentor for help](#where-to-get-help-with-browser-build).
 
 ### New Builder: Create Certificates Error
 
@@ -169,6 +171,14 @@ Ignore the warnings - this does not affect the build.
     On 21 April 2025, *GitHub* removed one of the third-party repositories that we used to keep automatic building going without action on your part. The repository was removed because it was in violation of the *GitHub* terms of service. *GitHub* disables automatic actions for repositories that have been inactive (no commits added in 60 days). For stable apps, like the *Loop* app, this third-party repository enabled a workaround to keep the builds happening.
 
     This affected all the Open-Source apps in our community - Loop, LoopFollow, LoopCaregiver, Trio, iAPS and xDrip4iOS. The developers in our community have restored the ability to build using the Browser Build method. Stay tuned for updates to required actions in the documentation over the next few months, before we hit the 60 day limit.
+
+### Manual Enable for Build Action May be Required
+
+The automatic build actions continue to happen on schedule, but starting May 2025, you may find your build action disabled by *GitHub*. (This might happen every 60 days, but it might happen sooner.) In that case, no build actually happens, no warning email is sent and a green checkmark (&#x2705;) appears beside a very short build action in which the actual build was skipped.
+
+If necessary, enable the build action at your repository as shown in the graphic below and then launch a manual build.
+
+![fix a disabled build state](img/build-disabled-fix.png )
 
 ### Rebuild: Create Certificates Error
 
@@ -333,7 +343,49 @@ For Version 3.4 and later - use [Examine Annotation](#examine-annotation) and re
 
 ## Action: `Add Identifiers` Errors
 
-For Version 3.4 and later - use [Examine Annotation](#examine-annotation) and read the annotation.
+### Error: `missing a required attribute`
+
+This happens if your `FASTLANE_KEY` is invalid. You may have copied it incorrectly or there may be some other reason why the value that you correctly copied from your `p8` file is not working.
+
+Copy the words on the line below and paste them into the search function for your action log.
+
+> ``` { .text .copy }
+> The provided entity is missing a required attribute - You must provide a value for the attribute
+> ```
+
+There were a number of cases recently where the solution was to revoke your `FASTLANE_KEY`, create a new one and then update these two secrets in your organzation, or in every repository if you are using a personal *GitHub* account to build.
+
+* `FASTLANE_KEY`
+* `FASTLANE_KEY_ID`
+
+Before revoking your key, first make sure that when you saved them to your Secrets Reference file, there was not a mistake. Make sure you are NOT using a smart editor; that can change a small letter to a capital letter. Make sure you did NOT insert or remove a line break and that you copied from the first hyphen to the last hyphen. The 2 keys should look like this:
+
+```
+FASTLANE_KEY_ID
+<looks like this>
+AAAAAAAAAA
+
+FASTLANE_KEY
+<looks like this>
+-----BEGIN PRIVATE KEY-----
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAA
+-----END PRIVATE KEY-----
+```
+
+The `FASTLANE_KEY` can be taken from the `p8` file you downloaded. The other keys are all able to be copied again from your *Apple* Developer account page. See [Copy `API Key Secrets`](secrets.md#copy-api-key-secrets){: target="_blank" }.
+
+If you decide to revoke the key and start again, see [Generate `API Key`](secrets.md#generate-api-key){: target="_blank" }. You will need to first revoke the existing `FASTLANE_KEY`:
+
+* Select `Edit`
+* Click on the checkbox beside `FASTLANE_KEY`
+* Select `Revoke Key`
+
+Then follow the normal steps detailed in that section to generate a new key and save the updated key and key ID in your Secrets Reference file and in your organization or repositories.
+
+Do not hesitate to [ask a mentor for help](#where-to-get-help-with-browser-build).
 
 ## Action: `Create Certificates` Errors
 
