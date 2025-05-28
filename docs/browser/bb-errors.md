@@ -28,8 +28,8 @@ If you are having trouble:
 
 These are two places to ask for help, but please choose only one. You may get a faster response from Facebook, but there are mentors on both sites:
 
-* [LoopandLearn Facebook Group](https://www.facebook.com/groups/LOOPandLEARN){: target="_blank" }
-* [Zulipchat: Loop: Build Help]( https://loop.zulipchat.com/#narrow/channel/148543-Loop/topic/Browser.20Build){: target="_blank" }
+* [LoopandLearn Facebook Group](https://www.facebook.com/groups/LOOPandLEARN)
+* [Zulipchat: Loop: Build Help]( https://loop.zulipchat.com/#narrow/channel/148543-Loop/topic/Browser.20Build)
 
 ### What Information is Needed for Help
 
@@ -89,22 +89,22 @@ If you get an error in an Action. Click on the link and scroll down to view the 
 
 ## New Builder: Quick Reference
 
-### New Builder: Validate Secrets Error
+### New Builder: Validate <code>Secrets</code> Error
 
 This is the first step. If you have not succeeded (&#x2705;) with this action - STOP.
 
-* No other action will work - because all the other actions repeat Validate Secrets as the first step of the action
+* No other action will work - because all the other actions repeat Validate <code>Secrets</code> as the first step of the action
 * Be sure to [Look at the Annotation](#look-at-the-annotation)
 * You can [ask a mentor for help](#where-to-get-help-with-browser-build)
 
 If you want to try to solve it yourself, refer back to these section in the documentation:
 
-* [Collect Secrets](secrets.md){: target="_blank" }
-* [Enter the Secrets](prepare-fork.md#enter-the-secrets){: target="_blank" }
+* [Collect <code>Secrets</code>](secrets.md){: target="_blank" }
+* [Enter the <code>Secrets</code>](prepare-fork.md#enter-the-secrets){: target="_blank" }
 
 ### New Builder: Add Identifiers Error
 
-If you succeeded with Validate Secrets, this should also succeed. If it does not, please skip ahead to [Error: `missing a required attribute`](#error-missing-a-required-attribute).
+If you succeeded with Validate <code>Secrets</code>, this should also succeed. If it does not, please skip ahead to [Action: `Add Identifiers` Error`](#action-add-identifiers-errors).
 
 Do not hesitate to [ask a mentor for help](#where-to-get-help-with-browser-build).
 
@@ -114,7 +114,7 @@ This is one of the hardest ones to solve. If you are getting this, don't be afra
 
 #### This is NOT Your Error
 
-When you start this action, GitHub starts a cloud computer to run your job for you. It doesn't have any information about you or your secrets - yet.
+When you start this action, GitHub starts a cloud computer to run your job for you. It doesn't have any information about you or your <code>Secrets</code> - yet.
 
 Early in the log file you will see two phrases in red font:
 
@@ -151,6 +151,8 @@ Ignore the warnings - this does not affect the build.
 
 
 ## Rebuild Errors: Quick Reference
+
+> There's a new error to annoy you. We are finding many experienced builders have to [Handle the `FastLane API Key` Error](#handle-the-fastlane-api-key-error). We don't know why, but it is happening a lot, so check out that section if you have already fixed the `Check Upstream and Keep Alive` Error.
 
 ### `Check Upstream and Keep Alive` Error
 
@@ -298,7 +300,7 @@ If there are *Apple* Developer agreements you have not accepted, you may get err
 * If you previously built successfully - it is almost certainly the agreement
 * It can take 15 minutes to an hour after the agreement is signed before it can be used
 
-If you need detailed instructions, click on this [<code>Apple Program License Agreement</code> Help Page](https://support.pushpay.com/s/article/Accepting-the-Apple-Program-License-Agreement){: target="_blank" }.
+If you need detailed instructions, click on this [<code>Apple Program License Agreement</code> Help Page](https://support.pushpay.com/s/article/Accepting-the-Apple-Program-License-Agreement).
 
 You can also get this message if the credit card used to purchase the Developer account is not current, e.g., no longer valid or credit card expiration date, as entered at *Apple*, has passed.
 
@@ -343,49 +345,9 @@ For Version 3.4 and later - use [Examine Annotation](#examine-annotation) and re
 
 ## Action: `Add Identifiers` Errors
 
-### Error: `missing a required attribute`
+We used to be able to say that if `Validate Secrets` worked then so did `Add Identifiers`. That is still typically true for new builders. But we are finding many experienced builders have to revoke their old `FastLane API Key` and generate a new one to be able to continue building. We don't know why, but it is happening a lot. If you are one of those experienced builders, head over to the [Handle the `FastLane API Key` Error](#handle-the-fastlane-api-key-error).
 
-This happens if your `FASTLANE_KEY` is invalid. You may have copied it incorrectly or there may be some other reason why the value that you correctly copied from your `p8` file is not working.
-
-Copy the words on the line below and paste them into the search function for your action log.
-
-> ``` { .text .copy }
-> The provided entity is missing a required attribute - You must provide a value for the attribute
-> ```
-
-There were a number of cases recently where the solution was to revoke your `FASTLANE_KEY`, create a new one and then update these two secrets in your organzation, or in every repository if you are using a personal *GitHub* account to build.
-
-* `FASTLANE_KEY`
-* `FASTLANE_KEY_ID`
-
-Before revoking your key, first make sure that when you saved them to your Secrets Reference file, there was not a mistake. Make sure you are NOT using a smart editor; that can change a small letter to a capital letter. Make sure you did NOT insert or remove a line break and that you copied from the first hyphen to the last hyphen. The 2 keys should look like this:
-
-```
-FASTLANE_KEY_ID
-<looks like this>
-AAAAAAAAAA
-
-FASTLANE_KEY
-<looks like this>
------BEGIN PRIVATE KEY-----
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAA
------END PRIVATE KEY-----
-```
-
-The `FASTLANE_KEY` can be taken from the `p8` file you downloaded. The other keys are all able to be copied again from your *Apple* Developer account page. See [Copy `API Key Secrets`](secrets.md#copy-api-key-secrets){: target="_blank" }.
-
-If you decide to revoke the key and start again, see [Generate `API Key`](secrets.md#generate-api-key){: target="_blank" }. You will need to first revoke the existing `FASTLANE_KEY`:
-
-* Select `Edit`
-* Click on the checkbox beside `FASTLANE_KEY`
-* Select `Revoke Key`
-
-Then follow the normal steps detailed in that section to generate a new key and save the updated key and key ID in your Secrets Reference file and in your organization or repositories.
-
-Do not hesitate to [ask a mentor for help](#where-to-get-help-with-browser-build).
+If you are new builder who gets an error at `Add Identifiers`, please [ask a mentor for help](#where-to-get-help-with-browser-build).
 
 ## Action: `Create Certificates` Errors
 
@@ -428,7 +390,7 @@ Click on this link to [Delete Identifiers](#delete-identifiers).
 #### Rerun Steps with correct TEAMID
 
 1. Enter your `TEAMID` correctly in the repository `Secrets`
-    - Make sure you use copy and paste from your [Apple Developer Membership](https://developer.apple.com/account/#!/membership){: target="_blank" } page for that `TEAMID`.
+    - Make sure you use copy and paste from your [Apple Developer Membership](https://developer.apple.com/account/#!/membership) page for that `TEAMID`.
     - Follow the update instructions here (this example is for `GH_PAT`, you'll do the same but for `TEAMID`) [Update Secrets](bb-update.md#update-secrets)
 
 1. Run Action: [Configure to Use Browser: `Add Identifiers`](identifiers.md#add-identifiers) again
@@ -441,7 +403,7 @@ You will remove that app and create a new one.
 
 #### Remove App with Incorrect `TEAMID`
 
-Go to [`App Store Connect / Apps`](https://appstoreconnect.apple.com/apps){: target="_blank" } and follow the numbered steps in the graphic below.
+Go to [`App Store Connect / Apps`](https://appstoreconnect.apple.com/apps) and follow the numbered steps in the graphic below.
 
 1. Find the *Loop* app you created earlier and click on it
 2. On the left side, under `General`, click on `App Information`
@@ -493,7 +455,7 @@ If you see this phrase, the `fastlane` package that is utilized during the `3. C
 
 To fix this error:
 
-- Open this link: [https://github.com/settings/tokens/](https://github.com/settings/tokens/){: target="_blank" }
+- Open this link: [https://github.com/settings/tokens/](https://github.com/settings/tokens/)
   - Here you will see your personal access token (`Fastlane Access Token`) that was created during [Configure to Use Browser: Setup *GitHub*: Create `GitHub Personal Access Token`](../browser/secrets.md#create-github-personal-access-token)
   - Note that `Tokens (classic)` is highlighted in the menu on the left
   - Click on the token name (should be bold, blue **`Fastlane Access Token`** ) to open its detail page
@@ -523,7 +485,7 @@ The full error message is:
 
 If you know you entered the incorrect <code>MATCH_PASSWORD</code> in your repository <code>Secrets</code>, go and fix it now and try again.
 
-Otherwise, you need to follow the steps to [Reset Match-Secrets](#reset-match-secrets).
+Otherwise, you need to follow the steps to [Delete Match-Secrets](#delete-match-secrets).
 
 ### Error: Could not create
 
@@ -545,7 +507,7 @@ These steps are only needed to make room for a `Certificate` when running versio
 
 1. Delete an old `Distribution Certificate`
     * *Apple* limits you to two `Distribution Certificates`
-    * Use this link to view your [Apple Developer Certificates](https://developer.apple.com/account/resources/certificates/list){: target="_blank" }
+    * Use this link to view your [Apple Developer Certificates](https://developer.apple.com/account/resources/certificates/list)
         * Carefully examine the `Type` column - do **not** delete a `Development` `Certificate`
         * If you accidentally delete a `Development` `Type` certificate associated with an Xcode build for your Loop app - it will stop working and you will be very sad
     * Click on the oldest `Distribution` `Certificate` and revoke it
@@ -598,7 +560,7 @@ If that phrase is found, then:
 
 
 * This can also be caused if you correctly created the *Loop* App but entered an incorrect value for the `TEAMID`.
-    * If you have the incorrect `TEAMID`, check this link: [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/identifiers/list){: target="_blank" } for entries with the incorrect `TEAMID` embedded
+    * If you have the incorrect `TEAMID`, check this link: [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/identifiers/list) for entries with the incorrect `TEAMID` embedded
     * For example, if your `TEAMID` is `0123456789`, but you entered `000123`, you may see both of these in your identifiers list
         * `com.0123456789.loopkit.Loop`
         * `com.000123.loopkit.Loop`
@@ -655,7 +617,7 @@ This tells you, the `Bundle ID` you selected in [First-Time: Create Loop App in 
 
 Once you have created an app in the *App Store* that is not based on your `TEAMID`, you cannot delete it, but you can Remove it (i.e. hide it so that it is no longer visible on this page and you don't accidentally click on it).
 
-1. Open this link: [App Store Connect / Apps](https://appstoreconnect.apple.com/apps){: target="_blank" } to view your apps; log in if needed.
+1. Open this link: [App Store Connect / Apps](https://appstoreconnect.apple.com/apps) to view your apps; log in if needed.
 1. Find the App with the wrong `Bundle ID` and click on it
 1. On the left-hand side, click on `App Information` (under `General`)
     * Confirm the `Bundle ID` listed does not include your `TEAMID`
@@ -787,44 +749,226 @@ Once you get a successful build, you return to using your normal `branch` for fu
 
 Assuming you have successfully built using the Browser-Build / *GitHub* method before:
 
-* If the details show this message, `Could not install WWDR certificate`, make sure your [*Apple developer* account](https://developer.apple.com){: target="_blank" } is in good standing and that there are no agreements that need to be accepted and that your `Distribution Certificates` did not expire
+* If the details show this message, `Could not install WWDR certificate`, make sure your [*Apple developer* account](https://developer.apple.com) is in good standing and that there are no agreements that need to be accepted and that your `Distribution Certificates` did not expire
 * Sometimes this is a sign that *Apple* did not respond to a request, this failure happens in the first few minutes
     * Repeat the build and it should be fine the next time
 
 ![graphic showing failure to install certificate](img/github-error-cert-failed.png){width="500"}
 {align="center"}
 
-## Extra Sections
+- - -
 
-It is unlikely you will need these sections.
+## Handle the `FastLane API Key` Error
 
-### Reset `Match-Secrets`
+We don't know why, but sometimes you have to take these steps to restore your ability to build. Make sure you really need to do this. The symptom is you were previously building successfully and all your license agreements are up to date, but all of a sudden you can no longer build.
 
-This is not the first thing to try, but sometimes it is the best approach.
+* Run the `Action: Add Identifiers`
+    * If you don't remember how to do that, this [link](identifiers.md#add-identifiers){: target="_blank" } opens in a separate tab with complete instructions
+* If that fails with the error `The provided entity includes an unknown relationship`, then yes - do these steps.
 
-There might be several reasons to do this:
+After completing the steps, try `Action: Add Identifiers` again and if it works, you can start building again.
 
-* You lost your <code>MATCH_PASSWORD</code> and want to build one of the [Other Apps](other-apps.md)
-* You thought you entered the correct <code>MATCH_PASSWORD</code> but you are getting [Error: Could not decrypt](#error-could-not-decrypt)
-* You are having trouble renewing your certificates after using Browser Build for a year
+The steps are:
 
-These steps are needed to reset your `Match-Secrets`:
+1. [Refresh `FastLane API Key`](#refresh-fastlane-api-key)
+1. [Update Secrets](#update-secrets)
+1. [Delete Match-Secrets](#delete-match-secrets)
+1. [Revoke Extra Distribution Certificate](#revoke-extra-distribution-certificate)
+1. [Delete Invalid Profiles](#delete-invalid-profiles)
+1. [Run Actions](#run-actions)
+
+This is a complicated fix. Do not hesitate to [ask a mentor for help](#where-to-get-help-with-browser-build).
+
+### Refresh `FastLane API Key`
+
+You will [revoke](#revoke-key), [generate](#generate-key) and [save](#download-key-and-save-secrets) a new key with the same name: `FastLane API Key`. It should be available immediately.
+
+#### Revoke Key
+
+This step is done at the App Store Connect site, click on this [link](https://appstoreconnect.apple.com/access/integrations/api).
+
+1. Click on the `Edit` button to open a new window
+2. Select the key you want to revoke (`FastLane API Key`)
+3. Click on the `Revoke Key` button
+4. Click on the `Revoke` button
+
+> ![revoke the FastLane API Key](img/api-key-revoke.svg){width="500"}
+
+The key has now been revoked and you can no longer use it.
+
+#### Generate Key
+
+Continuing on the same [webpage](https://appstoreconnect.apple.com/access/integrations/api), generate a new key.
+
+1. Click on either the plus sign or the Generate API Key button to open a new window
+2. Copy the name (below) and paste into the `Name` box
+
+    ```{ .text .copy }
+    FastLane API Key
+    ```
+3. Click in the box where it says start typing and a dropdown list appears - select Admin
+4. Confirm the name and that "Admin" is selected and then click on the `Generate` button.
+
+> ![generate a new FastLane API Key](img/api-key-generate.svg){width="500"}
+
+#### Download Key and Save Secrets
+
+Your screen should now look like this where the `Copy Key ID` shows up when you hover your mouse near the `KEY ID` and you can only `Download API Key` one time:
+
+> ![App Store Connect Key page](img/api-key-in-process-regen.svg){width="700"}
+{align="center"}
+
+**Summary:** You need to download the new key and move it to the special folder where you keep secrets. Your Secrets Reference file should be in the same place. Carefully delete the information from the `FastLane API Key` you just revoked and add the new information for the one you just generated.
+
+**Detailed Steps:**
+
+You need a new `FASTLANE_KEY_ID` and a new `FASTLANE_KEY`, but the `FASTLANE_ISSUER_ID` is unchanged because that is tied to your developer account. Save your updated Secrets Reference File.
+
+1. Find your `AuthKey` downloaded file in your downloads folder and move it to your special folder so you can find it again when you need it. 
+    The next task is to rename the file so you can open it. 
+    Highlight the filename and choose rename, then add ".txt" after ".p8". In other words, modify `AuthKey_AAAAAAAAAA.p8` to `AuthKey_AAAAAAAAAA.p8.txt` and click on `Use .txt` when questioned.
+> ![rename the p8 file](img/p8-key-rename.png){width=200}
+
+2. Double-click to open the `AuthKey_AAAAAAAAAA.p8.txt` file. It will look similar to the screenshot below. You need to highlight **ALL OF THE CONTENTS** of that file and copy it and then paste it both into your Secrets Reference file and the value for `FASTLANE_KEY_ID` when you [Update Secrets](#update-secrets).  
+      * **Click inside that file**
+      * Highlight **all** the text, and then
+      * Copy **all** of the text to the clipboard (Cf. screenshot below).
+        * On a *Mac*, press ++command+"A"++ to select all, then press ++command+"C"++ to copy the selection. 
+        * On a **PC**, press ++control+"A"++ to select all, then press ++control+"C"++ to copy the selection.
+
+    > ![img/apns-copy-key.png](../nightscout/img/apns-copy-key.png)
+
+3. The API Key ID is the 10-character name embedded in the filename: `AuthKey_AAAAAAAAAA.p8.txt`. You can also use the `Copy Key ID` button as mentioned at the [beginning of this section](#download-key-and-save-secrets). Either method, you update the `FASTLANE_KEY_ID` value in both into your Secrets Reference file and the value for `FASTLANE_KEY` when you [Update Secrets](#update-secrets).
+
+Reminder of the format for these two Secrets:
+
+```
+FASTLANE_KEY_ID
+<looks like this>
+AAAAAAAAAA
+
+FASTLANE_KEY
+<looks like this>
+-----BEGIN PRIVATE KEY-----
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAA
+-----END PRIVATE KEY-----
+```
+
+### Update Secrets
+
+Open the *GitHub* webpage for your organization or the repository if you are building with a personal account.
+
+Once you open the *GitHub* webpage, navigate to Settings and then scroll down to the `Secrets and variable` row and choose `Actions`.
+
+!!! tip "Use a direct link"
+    If you prefer, you can generate a direct link to this location:
+
+    ``` {.text .copy  title="If you use an organization" }
+    https://github.com/organizations/my-name-org/settings/secrets/actions
+    ```
+
+    ``` { .text .copy  title="If you do not use an organization" }
+    https://github.com/my-name/LoopWorkspace/settings/secrets/actions
+    ```
+
+Refer to graphic below for help. This example is for updating an organization secret. For a personal repository update, there is no step 2. You will be updating 2 different <code>Secrets</code>.
+
+1. Tap on the pencil beside the <code>Secret</code> you plan to change; you must change both; the order is not important
+    * `FASTLANE_KEY`
+    * `FASTLANE_KEY_ID`
+1. Click on the `enter a new value` button if it exists (organization only)
+1. Click in the `Value` box for that <code>Secret</code> and paste in the value
+1. Click on `Save changes`
+
+> ![screen with instructions to update a secret](img/update-org-secret.svg){width="700"}
+
+### Delete `Match-Secrets`
+
+This is always required after a new `FastLane API Key` has been generated.
+
+Open the *GitHub* website for your organization or personal account.
+
+``` {.text .copy  title="If you use an organization" }
+https://github.com/my-name-org/Match-Secrets
+```
+
+``` { .text .copy  title="If you do not use an organization" }
+https://github.com/my-name/Match-Secrets
+```
 
 1. Delete your `Match-Secrets` `Repository`
-    * Instructions to delete a repository are found at [*GitHub* Docs](https://docs.github.com/en/repositories/creating-and-managing-repositories/deleting-a-repository){: target="_blank" }
-1. In your fork of LoopWorkspace:
-    * This will automatically create a new `Match-Secrets` `Repository` for you
-    * Run the `Action`: `Create Certificates`
-    * If this fails, click on this link for the most likely [Error: Could not create](#error-could-not-create)
-    * If that doesn't help, check all your <code>Secrets</code> and try again
-1. You are now ready to run the `Action`: `Build Loop`
+    * Click on Settings
+    * Scroll to the bottom (into the Danger Zone)
+    * Choose `Delete this repository`
+    * Read and follow directions to delete
+2. The next action you run will automatically create a new Match-Secrets repository for you
 
-!!! important "Other Apps"
-    All DIY iOS apps that have an associated <code>*GitHub* Browser Build</code> method require the same 6 <code>Secrets</code>.
+### Revoke Extra Distribution Certificate
 
-    If you add an app to your *GitHub* username (by forking the repository and adding <code>Secrets</code>) and then build it, it encrypts your `Certificate` using `MATCH_PASSWORD`.
+This step is done at the *Apple* Developer site; click on this [link](https://developer.apple.com/account/resources/certificates/list).
 
-    If you already have the other apps configured and then you delete `Match-Secrets` and add a new one, you will need to run `Create Certificates` for each app before the next time you build each app - go ahead and do that now so you don't forget.
+If you only have *one* Certificate of the `Distribution` type, similar to the graphic shown below, skip ahead to [Delete Invalid Profiles](#delete-invalid-profiles). Ignore any other types of Certificate. Do not delete them.
+
+> ![view the current certificates at Apple](img/certificates-01.png)
+
+If you have two Certificates that have the `Distribution` type, select the oldest one and delete it.
+
+* Carefully examine the Type column - do not delete a Development Certificate
+    * If you accidentally delete a Development Type certificate associated with an Xcode build for your app, it will stop working and you will be very sad
+    * Click on the oldest Distribution Certificate, select Revoke and confirm.  If you have two with the same expiration date, revoke both.
+
+You will get an email informing you the certificate was revoked
+
+!!! tip "Navigate with Menu"
+    On the left side, you see a menu that indicates Certificates, Identifiers, Keys and Profiles. You can navigate between these items by clicking on the links.
+
+    * Certificates (this section)
+    * Identifiers (you used those when adding the App Group)
+    * Keys
+        * Access to the *Apple* Push Notification Keys used by people to enable remote control
+        * The `FastLane API Key` is at the App Store Connect site - not at this site
+    * Profiles (next section)
+
+### Delete Invalid Profiles
+
+This step is done at the *Apple* Developer site; click on this [link](https://developer.apple.com/account/resources/profiles/list).
+
+Your profiles will be displayed. Under the `Expiration` column, you might see an expiration date, even if some of these are invalid because you just revoked a certificate, or you might see `Invalid`.
+
+1. Click on the `Edit` button to open a new window
+
+    > ![examine profiles](img/profiles-01.png){width="500"}
+
+   
+2. Select invalid profiles - if all are invalid, click all profiles at upper left
+3. Click on the `Delete` button to revoke selected profiles
+
+    > ![select invalid profiles](img/profiles-02.png){width="500"}
+
+4. Review the profiles - note that in this view, the full name of each profile is visible - and then click on the `Delete` button
+
+    > ![delete selected profiles](img/profiles-03.png){width="500"}
+
+### Run Actions
+
+If you can't remember how to run the actions, the link for each opens a separate page with details and graphics.
+
+* If [`Action: Add Identifiers`](identifiers.md#add-identifiers){: target="_blank" } fails with the same error as before, you might need to revoke and generate the [`FastLane API Key` again](#refresh-fastlane-api-key). (I had to do it twice when this happened to me.)
+
+* If `Action: Add Identifiers` succeeds continue with these two actions:
+
+    * [`Create Certificates`](certs.md#create-certificates){: target="_blank" }
+    * [`Build`](build-yml.md#build-the-loop-app){: target="_blank" }
+
+If these all succeed, you are done with the `FastLane API Key` Error steps.
+
+!!! important "Personal *GitHub* Account"
+    If you are using a personal *GitHub* account to build instead of an organization, you must update your <code>Secrets</code> for `FASTLANE_KEY_ID` and `FASTLANE_KEY` for each of the repositories.
+
+## Other Help Steps
 
 ### Delete Identifiers
 
@@ -835,7 +979,7 @@ These instructions are useful if:
 
 The `Identifier` that is associated with the `Loop` identifier cannot be deleted if it is already in the *App Store* but all others can. If you attempt to delete the `XC` *Loop* identifier, you may be told it cannot be deleted because it is in use in the app store. That's OK. If a `Bundle ID` has ever been associated with an app in the *App Store*, you cannot delete the `Identifier`.
 
-* Open this link: [Certificates, Identifiers & Profiles: Identifiers List](https://developer.apple.com/account/resources/identifiers/list){: target="_blank" } on the *Apple Developer* site.
+* Open this link: [Certificates, Identifiers & Profiles: Identifiers List](https://developer.apple.com/account/resources/identifiers/list) on the *Apple Developer* site.
 * Use the graphic below as a guide to removing identifiers
 * Keep repeating the steps until you've removed all the identifiers you can (or want to) delete
 * It is OK to delete an identifier even if it does have your correct `TEAMID`
@@ -848,7 +992,7 @@ The `Identifier` that is associated with the `Loop` identifier cannot be deleted
 ![steps to delete a given identifier](img/delete-identifiers.svg){width="700"}
 {align="center"}
 
-If coming here because you enter the wrong `TEAMID` in `Secrets` - return to [Rerun Steps with Correct TEAMID](#rerun-steps-with-correct-teamid) when you've deleted as many identifiers as you can.
+If coming here because you entered the wrong `TEAMID` in <code>Secrets</code> - return to [Rerun Steps with Correct TEAMID](#rerun-steps-with-correct-teamid) when you've deleted as many identifiers as you can.
 
 After you delete identifiers, you must add them back before you can build a given app. Configure them and build again.
 
@@ -858,9 +1002,9 @@ You can use the same GitHub account with a new developer ID. This is an uncommon
 
 Here are the steps:
 
-1. Update the 4 secrets that are associated with the Apple Account for each repository on the GitHub used for browser build:
+1. Update the 4 <code>Secrets</code> that are associated with the Apple Account for each repository on the GitHub used for browser build:
     * TEAMID
     * FASTLANE_ISSUER_ID
     * FASTLANE_KEY_ID
     * FASTLANE_KEY
-1. Once the Secrets are updated, start at the [Identifiers](identifiers.md){:target="_blank"} page and work through the process for each app
+1. Once the <code>Secrets</code> are updated, start at the [Identifiers](identifiers.md){:target="_blank"} page and work through the process for each app

@@ -74,7 +74,7 @@ Under ordinary circumstances, you do not *have to* rebuild or update your *Loop*
 
     There is also a helpful video for updating:
 
-    * [How to Update and Rebuild DIY Loop with a Web Browser](https://www.youtube.com/watch?v=0ipTsiqbbrQ){: target="_blank" }
+    * [How to Update and Rebuild DIY Loop with a Web Browser](https://www.youtube.com/watch?v=0ipTsiqbbrQ)
 
 !!! important "How to Ask for Help"
     Updating with Browser Build should be pretty fast and often automatic.
@@ -92,12 +92,12 @@ Under ordinary circumstances, you do not *have to* rebuild or update your *Loop*
 
     If your build with browser fails, wait longer. An hour wait was reported by one person.
 
-Sign in to your [Apple Developer account](https://developer.apple.com/account){: target="_blank" }. If there are agreements you have not accepted, you will get errors when you try to Build that indicate your *Apple* <code>Secrets</code> are incorrect - that is very unlikely. You may also need to update your credit card information if it has changed, for example, if there is a new expiration date.
+Sign in to your [Apple Developer account](https://developer.apple.com/account). If there are agreements you have not accepted, you will get errors when you try to Build that indicate your *Apple* <code>Secrets</code> are incorrect - that is very unlikely. You may also need to update your credit card information if it has changed, for example, if there is a new expiration date.
 
 * For an update, you do not need to modify the <code>FASTLANE_ISSUER_ID</code>, <code>FASTLANE_KEY_ID</code> or <code>FASTLANE_KEY</code>
 * Check your *Apple* Developer account for agreements, then continue
 
-If you need detailed instructions, click on this [<code>Apple Program License Agreement</code> Help Page](https://support.pushpay.com/s/article/Accepting-the-Apple-Program-License-Agreement){: target="_blank" }.
+If you need detailed instructions, click on this [<code>Apple Program License Agreement</code> Help Page](https://support.pushpay.com/s/article/Accepting-the-Apple-Program-License-Agreement).
 
 * Accept the `Apple Program License Agreement` (only)
     * You do NOT need to accept anything related to the `Paid Applications Schedule Agreement`
@@ -116,6 +116,97 @@ Digital Service Act Compliance
 > This is Step 2 of 5 - it may not always be necessary, but please check every time.
 
 Open your *GitHub* account and select your <code>LoopWorkspace repository</code> from your repositories list.
+
+### Update from 3.2.x to 3.4
+
+This should only be necessary if you are changing from an older, Mac-Xcode build of version 3.2.x to a Browser Build of 3.6.x. Most people are updating from 3.4.x to 3.6.x and should skip ahead to [Special Instructions for 3.6.0](#special-instructions-for-360).
+
+For the update from 3.2.x to 3.6, you must do more than "just" build. If you skip this step - the build will fail.
+
+* The `Identifier` for the "`widget`" changed from "`SmallStatusWidget`" to the more descriptive "`LoopWidgetExtension`"
+
+> If you built version 3.3.0 (the `dev branch` before release of version 3.4) or newer, you can skip ahead to [Special Instructions for 3.6.0](#special-instructions-for-360).
+
+You will (1) run [`Add Identifiers`](#add-identifiers), (2) [add the `App Group`](#add-app-group-to-new-identifier) to the new identifier, (3) run [`Create Certificates`](#create-certificates) and then (4) run [`Build Loop`](#build-the-app).
+
+#### Add Identifiers
+
+In your fork of LoopWorkspace:
+
+* Run the Action: `Add Identifier`
+* Wait for it to succeed
+
+??? tip "Detailed instructions for `Add Identifier` (Click to open/close)"
+    Refer to the graphic below for the numbered steps:
+
+    1. Click on the `Actions` tab of your <code>LoopWorkspace</code> repository
+    1. On the left side, click on 2. <code>Add Identifiers</code>
+    1. On the right side, click `Run Workflow` to show a dropdown menu
+        * You will see your default branch (typically this is `main`)
+    1. Tap the green button that says `Run workflow`.
+
+        ![add identifiers using github actions](img/action-02-add-identifiers.svg){width="700"}
+        {align="center"}
+
+    The `Add Identifiers` &nbsp;<span class=notranslate>Action</span>&nbsp; should succeed or fail in a few minutes. Do not continue to the next step until this one succeeds.
+
+    * If you see the green check (:octicons-check-circle-fill-16:{: .passed })  continue to the next section
+    * If you see the red `X` (:octicons-x-circle-fill-16:{: .failed }):
+        * [Action: Add Identifiers Errors](bb-errors.md#action-add-identifiers-errors){: target="_blank" } tells you what to search for in the file
+        * Resolve the error and repeat `Add Identifiers`
+
+#### Add `App Group` to New `Identifier`
+
+Open the [Certificates, Identifiers & Profiles: Identifiers List](https://developer.apple.com/account/resources/identifiers/list){: target="_blank" } page.
+
+Click on the "`LoopWidgetExtension`" identifier to open the `Edit Your App ID Configuration` screen.
+
+| `NAME` | `IDENTIFIER` |
+|-------|------------|
+| `Loop Widget Extension` | `com.TEAMID.loopkit.Loop.LoopWidgetExtension` |
+
+The graphic below has numbered steps that match these directions:
+
+1. Looking at the `App Services` column, scroll down to the `App Groups` row and ensure the check box (under the `Capabilities column`) for `App Groups` is checked
+2. If the word `Configure` shows up, tap on it
+    * This opens the `App Group Assignment` screen
+    * If it said `Edit` instead of `Configure` - you can click to confirm you have the correct App Group but won't need to continue or save if it is correct
+3. Check the box by `Loop App Group` that uses your `TEAMID` in `group.com.TEAMID.loopkit.LoopGroup`
+    * Note that if you previously built with Xcode, the name may be different, i.e., `XC group com TEAMID loopkit LoopGroup`
+4. Tap `Continue`
+5. Tap `Save`
+
+![graphic showing selection of the correct App Group](img/update-identifier-loop-3-4.png){width="700"}
+{align="center"}
+
+If you did not need to make changes, the `Save` button will not be active.
+
+* Tap on the `< All Identifiers` link at the top left
+
+The full list of Identifiers should be displayed again.
+
+!!! note "Other Identifiers"
+    All other identifiers should be already set up.
+
+    * If they are not, refer to [Configure to Use Browser: Add App Group to Identifiers](prepare-app.md#add-app-group-to-identifiers){: target="_blank" }
+
+#### Create Certificates
+
+You must run the action `Create Certificates` again because the `Identifiers` were updated. Wait for this to succeed before trying to build.
+
+???+ tip "Detailed instructions (Click to open/close)"
+    Refer to the graphic below for the numbered steps:
+
+    1. Click on the "<code>Actions</code>" tab of your <code>LoopWorkspace</code> repository
+    1. On the left side, click on "`Create Certificates`"
+    1. On the right side, click "`Run Workflow`" to show a dropdown menu
+        * You will see your default branch (typically `main`)
+    1. Tap the green button that says "`Run workflow`".
+
+        ![create certificates using github actions](img/action-03-create-certs.svg){width="700"}
+        {align="center"}
+
+    1. Wait a minute or two for the action to finish
 
 ### Special Instructions for 3.6.0
 
@@ -302,7 +393,7 @@ If your `Personal Access Token` has expired or has an expiration date, you can r
 
 You can regenerate your *GitHub* `Personal Access Token` at any time by clicking on the link below. (it will open in a new browser tab.)
 
-* [Link to access your *GitHub* Personal Access Token](https://github.com/settings/tokens){: target="_blank" }
+* [Link to access your *GitHub* Personal Access Token](https://github.com/settings/tokens)
 
 The `FastLane Access Token` is a clickable link.
 
@@ -352,7 +443,7 @@ Scroll all the way to the top of the screen and tap on your LoopWorkspace link. 
 
 ### Add Test Details to *TestFlight*
 
-About half an hour after the build action completes, the new build will appear in the TestFlight screen at this link: [App Store Connect / Apps](https://appstoreconnect.apple.com/apps){: target="_blank" }
+About half an hour after the build action completes, the new build will appear in the TestFlight screen at this link: [App Store Connect / Apps](https://appstoreconnect.apple.com/apps)
 
 * Log in if needed
 * Select your *Loop* app
@@ -404,7 +495,7 @@ Manual certificate renewal is not longer required if you added the `Variable` `E
 
 Manual certificate renewal is not longer required if you added the `Variable` `ENABLE_NUKE_CERTS`. See [Add Variable](prepare-fork.md#add-variable){: target="_blank" }.
 
-1. Use this link to view your [Apple Developer Certificates](https://developer.apple.com/account/resources/certificates/list){: target="_blank" }
+1. Use this link to view your [Apple Developer Certificates](https://developer.apple.com/account/resources/certificates/list)
     * If your screen shows no Certificates and you see a message "Getting Started with Certificates", your certificate already expired and was removed by *Apple*; so skip ahead to Step 2: Navigate to your `Match-Secrets` Repository
     * Carefully examine the `Type` column - do **not** delete a certificate with type of `Development`
         * If you do not have any rows that say the type is `Distribution`, your certificate already expired and was removed by *Apple*; so skip ahead to Step 2
@@ -430,7 +521,7 @@ Manual certificate renewal is not longer required if you added the `Variable` `E
     {align="center"}
 
     !!! question "Deleting the certs/distribution folder did not work for me"
-        Some people reported trouble with this step. The other option is to delete and create a new `Match-Secrets` repository: see [Reset `Match-Secrets`](bb-errors.md#reset-match-secrets){: target="_blank" }
+        Some people reported trouble with this step. The other option is to delete and create a new `Match-Secrets` repository: see [Delete `Match-Secrets`](bb-errors.md#delete-match-secrets){: target="_blank" }
 
 1. While still within your *Github* account, navigate to your fork of LoopWorkspace.
     * You can do this several ways, but one method is demonstrated by the GIF below
