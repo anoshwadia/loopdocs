@@ -150,6 +150,11 @@ The `Validate Secrets` &nbsp;<span class=notranslate>Action</span>&nbsp; should 
 
 ## Add Identifiers
 
+!!! important "Add Identifiers were Temporarily Unavailable"
+    The Add Identifiers action stopped working for a time. The timing for the release of the fix for LoopCaregiver may be delayed slightly. It is fixed for dev branch of LoopFollow and will be released to LoopFollow main soon.
+
+    If you are a new builder and Add Identifiers does not work - please wait a day or two and try again.
+
 Near the top middle of your Repository fork, click on the "Actions" tab.
 
 * If this is the first `Action` you run with this repository you'll be informed that `Workflows aren't being run on this forked repository`
@@ -190,7 +195,7 @@ After successfully performing the `Add Identifiers Action`, you will see the ide
 
 The *LoopCaregiver* app requires updates to the `Identifiers` after they are generated.
 
-The *LoopFollow* app does not require this extra step. You can skip ahead to [Create App in App Store Connect](#create-app-in-app-store-connect).
+The *LoopFollow* app does not require this extra step. You can skip ahead to [Create App in App Store Connect](#create-app-in-app-store-connect). The *LoopFollow* app does not require any special capabilities.
 
 ## Add `App Group` to `LoopCaregiver`
 
@@ -231,6 +236,20 @@ If you do not see them, please sync your `LoopCaregiver` repository and then run
 | `LoopCaregiverWatch` | `com.TEAMID.loopkit.LoopCaregiver.watchkitapp` |
 | `LoopCaregiverWatchWidgetExtension` | `com.TEAMID.loopkit.LoopCaregiver.watchkitapp.WidgetExtension` |
 | `LoopCaregiverWidgetExtension` | `com.TEAMID.loopkit.LoopCaregiver.WidgetExtension` |
+
+The *LoopCaregiver* app requires capabilities be associated with the Identifiers. When Add Identifiers is working, this is handled for you. The annotation box below is only for the special case where you must configure Identifiers manually.
+
+??? abstract "Capabilities for Each LoopCaregiver Identifier (Click to open/close)"
+    When <code>Action: Add Identifiers</code> is working, you do not need this information. If you ever need to manually create the Identiers, the table below lists the required capabilities. For the App Group, you must first add that capability and update the Identifier and then modify the Identifier a second time to add the LoopCaregiver App Group as directed in the next section.
+
+    | NAME | IDENTIFIER | Capabilities |
+    |:--|:--|:--|
+    | `LoopCaregiver` | `com.TEAMID.loopkit.LoopCaregiver` | App Groups<br> |
+    | `LoopCaregiverIntentExtension` | `com.TEAMID.loopkit.LoopCaregiver.IntentExtension` | App Groups<br> |
+    | `LoopCaregiverWatch` | `com.TEAMID.loopkit.LoopCaregiver.watchkitapp` | App Groups<br> |
+    | `LoopCaregiverWatchWidgetExtension` | `com.TEAMID.loopkit.LoopCaregiver.watchkitapp.WidgetExtension` | App Groups<br> |
+    | `LoopCaregiverWidgetExtension` | `com.TEAMID.loopkit.LoopCaregiver.WidgetExtension` | App Groups<br> |
+
 
 ### Add `LoopCaregiverGroup` to each Identifier
 
