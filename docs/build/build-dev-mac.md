@@ -9,23 +9,42 @@
 
 * **[What's going on in the `dev branch`](../version/development.md#whats-going-on-in-the-dev-branch)**
 
-## `BuildLoopDev` Script
+## Build `dev` with Mac
 
-There is a script to assist in building the `dev branch`. It gives you the option to choose the tip of the `dev branch` or to build a lightly tested commit. If you have not used the [Build Select Script](../build/build-app.md#build-select-script) to build Loop previously, you may want to review that page. The command below can be pasted into the terminal of your Mac. Read the directions in the script.
+The same script is used to build the `dev` branch as is used to build the `main` branch. Copy and paste this command in any terminal. Follow the instructions on the screen. Choose Build Loop and then choose `dev` branch.
 
-``` { .bash .copy title="Copy and Paste to start the BuildLoopDev script" }
+``` { title="Copy and Paste to start the BuildLoop Script" }
 /bin/bash -c "$(curl -fsSL \
-  https://raw.githubusercontent.com/loopandlearn/lnl-scripts/main/BuildLoopDev.sh)"
+  https://raw.githubusercontent.com/loopandlearn/lnl-scripts/main/BuildSelectScript.sh)"
 ```
+
+For more detailed instructions, head over to:
+
+* [Experienced Builder: Instructions to Download and Build Loop](https://loopkit.github.io/loopdocs/build/build-app/#download-loop){: target="_blank" }
+
+* [New Builder: Start here to set up Developer Mode on Phone and Watch](https://loopkit.github.io/loopdocs/build/build-app/#prepare-your-phone-and-watch){: target="_blank" }
 
 ### Build Other Branches
 
-You can use the BuildLoopDev script to build a specific development branch, other than `dev`. At the end of the script (from above), add a space after the final quote, followed by a hyphen, another space and then the branch name. See the example below that would build `other-branch`, if such a branch existed. This is just an example. You need to substitute the branch you desire for `other-branch`. The example below uses a continuation character to put the extra characters on a new line to make this easier to read.
+You can use the BuildLoop script to build a feature branch that was advertised in zulipchat but has not been merged into `dev`. 
+
+> Note. You cannot use the BuildSelectScript to select a custom branch. You must directly choose the app you wish to build. In this case, BuildLoop.
+
+In the command (shown below), there is a space after the final quote, followed by a hyphen, another space and then the branch name. This example would build `other-branch`, if such a branch existed. 
+
+> This is just an example. You need to substitute the branch you desire for `other-branch`. The example below uses a continuation character to put the extra characters on a new line to make this easier to read.
 
 ``` { title="Replace <code>other-branch</code> with the desired branch" }
 /bin/bash -c "$(curl -fsSL \
-  https://raw.githubusercontent.com/loopandlearn/lnl-scripts/main/BuildLoopDev.sh)" \
+  https://raw.githubusercontent.com/loopandlearn/lnl-scripts/main/BuildLoop.sh)" \
    - other-branch
+```
+
+If you want to customize this custom branch. You can call the Customization Select script after you download the custom branch. This script finds the most recent download in your ~/Downloads/BuildLoop folder. If you want to customize a specific branch, first set the terminal to be in the LoopWorkspace folder for the download you want to customize.
+
+``` { title="Copy and paste to start the CustomizationSelect script" }
+/bin/bash -c "$(curl -fsSL \
+  https://raw.githubusercontent.com/loopandlearn/lnl-scripts/main/CustomizationSelect.sh)"
 ```
 
 ## Update Loop-dev
@@ -43,14 +62,14 @@ You may prefer to use commands to fetch and pull the latest code without making 
 
 ## Loop-dev Version
 
-The version of code that shows up under the Loop Settings screen does not change when the `dev branch` is modified.
+Starting with v3.7.x, the version of code that shows up under the Loop Settings screen increments with each formal change to the `dev` branch using the pull request process. That increment might be an update to match a hotfix to `main` or might be from a new feature brought just into the `dev` branch.
 
-If you need help with your app, the mentors need more information. Please issue a Loop Report when asking for help. Refer to [Support](../loop-3/settings.md#support) for how to issue a Loop Report. If you want to keep track yourself, refer to [Identify Loop-dev Version](#identify-loop-dev-version)
+If you need help with your app, the mentors need to know you are running a `dev` branch and the specific version that shows on your settings screen. 
 
-* [`Loop` Version Numbering](../version/releases.md#loop-version-numbering)
+For a summary of features added to the `dev` branch by version number:
 
-### Identify Loop-dev Version
+* [Updates in `dev`](../version/development.md#updates-in-dev){: target="_blank" }
 
-The version of code that shows up under the Loop Settings screen will remain fixed until Loop-dev is released. In order to identify which version of dev you have on your phone, you need the commit.
+For more information about version numbers:
 
-The commit is identified by a 7-digit alphanumeric code.  That code was also appended to the folder name of the downloaded code under Downloads/BuildLoop as shown in the graphic above.  You can use finder to view the folder name after the script completes. It also appears in the Loop Report, refer to [Support](../loop-3/settings.md#support) for instructions on issuing a Loop Report. After you issue the Loop Report, look at the workspaceGitRevision number near the beginning of the report.
+* [`Loop` Version Numbering](../version/releases.md#loop-version-numbering){: target="_blank" }
