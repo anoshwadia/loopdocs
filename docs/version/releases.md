@@ -10,7 +10,7 @@ For information about version 2 releases and compatibility between version 2 and
 
 The current released version for the *Loop* app is v3.8.1 and is built from the `main` branch of LoopWorkspace. The dates and contents for releases are summarized below in reverse chronological order (so newest release information comes first).
 
-> When main is updated to v3.8.1 for a hotfix, the same hotfix is applied to the `dev` branch. It may take a day before the hotfix/dev_3.9.1 PR is merged.
+> When main was updated to v3.8.1 for a hotfix, the same hotfix was applied to the `dev` branch, which is at v3.9.1.
 
 > See [Updates in `dev`](development.md#updates-in-dev){: target="_blank" } for a summary of difference, if any, between `main` and `dev`.
 
@@ -35,6 +35,12 @@ Releases from `Loop v3.4.4` and older are reported at [*GitHub*&nbsp;_<span tran
 
 ## Loop v3.8.x
 
+!!! important "[iOS 15 is no longer supported](../build/phone.md#not-supported){: target="_blank" }"
+    * It is a known issue that some screens show up as a different language for iOS 15 devices with v3.8.x.
+    * It is expected *Loop* will soon require a minimum of iOS 17
+
+    See [Compatible Device](../build/phone.md#compatible-device){: target="_blank" }:
+
 ### Loop v3.8.1
 
 [*Loop* v3.8.1](https://github.com/LoopKit/LoopWorkspace/releases/tag/v3.8.1) was released on 23 September 2025.
@@ -53,7 +59,7 @@ When putting together the hotfix, the following additional updates were included
     * Dana users no longer need to modify the code to use [Background Sound](../troubleshooting/dana-faq.md#background-sound){: target="_blank" } if their CGM does not have a heartbeat
 * Update some translations
 
-> When main is updated to v3.8.1 for a hotfix, the same hotfix is applied to the `dev` branch. It may take a day before the hotfix/dev_3.9.1 PR is merged.
+> When main was updated to v3.8.1 for a hotfix, the same hotfix was applied to the `dev` branch, which is at v3.9.1.
 
 ### Loop v3.8.0
 
