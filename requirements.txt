@@ -108,7 +108,7 @@ pygments==2.19.2
     # via mkdocs-material
 pymdown-extensions==10.20.1
     # via mkdocs-material
-pypdf==6.8.0
+pypdf==6.9.2
     # via mkdocs-exporter
 python-dateutil==2.9.0.post0
     # via
@@ -123,7 +123,7 @@ pyyaml==6.0.3
     #   pyyaml-env-tag
 pyyaml-env-tag==1.1
     # via mkdocs
-requests==2.32.5
+requests==2.33.0
     # via
     #   mkdocs-htmlproofer-plugin
     #   mkdocs-macros-plugin
