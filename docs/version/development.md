@@ -1,22 +1,54 @@
 ## Overview
 
-The early history of the *Loop* app was touched on in the introductory [*LoopDocs* Overview: Development History](../intro/overview-intro.md#development-history) section.
+The early history of the *Loop* app was touched on in the introductory [*LoopDocs* Overview: Development History](../intro/overview-intro.md#development-history){: target="_blank"} section.
 
-The [*Loop* Releases](../version/releases.md) page lists releases since version 2.0 in reverse chronological order.
+The [*Loop* Releases](releases.md){: target="_blank"}  page lists releases since version 3.0 in reverse chronological order. For older release history, check out [*Loop* 2 and older](releases-version2.md){: target="_blank"} .
 
-The next version of the *Loop* app is developed using branch(es), independent of the released *Loop* version, which is found in <span>the `main` branch</span>. 
+The current released version of the *Loop* app is always in the `main` branch of the LoopWorkspace repository.
 
-<span>The `dev` branch</span> is used by the developers to push out changes for users to test. You should only test a development branch if you are willing to be both an active participant with the developers to monitor announcements and provide feedback and to build frequently to obtain the latest feature or bug-fix that is being tested. If you are willing to help out - this is the way the next release of *Loop* is improved.
 
-If you choose to use `dev`, you accept that this code is not released.
+### Relationship with *Tidepool Loop*
+
+*Tidepool Loop* is an independent version of *Loop*. *Tidepool Loop* started with *Loop* code, added safety features, and additional FDA approved device integrations. Much of the *Tidepool Loop* improvements are also published as open source, which volunteers in the community are free to incorporate back into *Loop*. The device integrations for *Tidepool Loop* are generally closed source when required by device manufacturers.
+
+* In 2019, the non-profit *Tidepool* organization partnered with the JAEB Foundation to review outcomes from volunteers using *Loop*
+    * *Tidepool* successfully submitted *Tidepool Loop* to the Federal Drug Administration as an approved automated insulin delivery system
+    * *Tidepool Loop* is available now, please see their website for more information: [*Tidepool Loop*](https://www.tidepool.org/tidepool-loop)
+* In 2022, some of the *Tidepool* open-source code was brought into the *Loop* project by dedicated volunteers and eventually released as *Loop* 3
+    * The traditional OS-AID process of community volunteers providing updates continued throughout
+* In 2026, volunteers are once-again bringing in upgrades from *Tidepool* open-source code, laying the foundation for what will be *Loop* 4.
+    * Look for upcoming information about `next-dev` branch - it is awesome, but still being tested
+    * If you are interested, follow along in [zulipchat: Loop next-dev Status](https://loop.zulipchat.com/#narrow/channel/144182-development/topic/Loop.20next-dev.20Status/with/600761707)
+
+### Development Branches and Breaking Changes
+
+The next version of the *Loop* app is developed using branches. 
+
+* The `dev` branch is used by the developers to push out changes for users to test before that code is released
+    * Sometimes there are breaking changes
+        * A breaking change is when you can build the new branch over your existing app, but cannot go backwards without deleting your app from your phone
+    * We are bringing in updates for Tidepool in a special branch `next-dev`
+        * Note that you might be able to go backward to `main` or `dev` from `next-dev` but it is not guaranteed
+* In addition there are specific feature branches that enable users to test new pump and cgm managers or features for existing managers before they are added to the `dev` branch
+* You should only test a development or feature branch if you are willing to be an active participant with the developers:
+    * [Monitor announcements in zulipchat](https://loop.zulipchat.com/#narrow/channel/144182-development) 
+    * Provide feedback
+    * Build frequently to obtain the latest feature or bug-fix that is being tested
+* If you are willing to help out - this is the way the next release of *Loop* is improved.
 
 Please read this entire page before using any version of *Loop* other than the released code.
 
 ## Updates in `dev`
 
-This section provides an overview of changes to `dev` compared to `Loop v3.14.0`. 
+This section provides an overview of changes to `dev` compared to the current release: [`Loop v3.14.2`](releases.md#v3142-highlights){: target="_blank" }. 
 
-The current version of `dev` is v3.14.0 with code identical to that in the `main` branch.
+The current version of `dev` is v3.14.2 and is the same as `main`.
+
+* Those who have been using feature branches for Medtrum or Eversense support can now build the released code
+* Those on the Dana pump must keep building a feature branch, but the name of the branch changed
+    * Dana users need to update the name of the branch they build to `feat/all-managers`
+
+Please see [Table of Retired Branches](#table-of-retired-branches) for up to date information about what branch you need to build for Dana support.
 
 Please check the [development channel in zulipchat](https://loop.zulipchat.com/#narrow/channel/144182-development) for notifications when an update to the `dev` branch is expected so you will be prepared. Do this **before** you install a `dev` build from TestFlight.
 
@@ -27,7 +59,7 @@ In addition to the main and dev branches, which are tightly controlled and only 
 * The `update_dev_to_M.m.#` is where the next version of dev is tested before becoming part of `dev` and later being released as `main`
 * The branches starting with `feat/` have one or more special features, like support for new pumps, CGM or the new universal pump manager for all types of Omnipods
 
-The graphic below shows the `main` and `dev` branches along with some feature branches and an update branch.
+The graphic below shows the `main` and `dev` branches along with some feature branches and an update branch. This is a snapshot in time and no longer reflects the current status. Always check [Table of Active Branches](#table-of-active-branches).
 
 > ![Active branches for LoopWorkspace](img/loop-development-branches.png ){width="750"}
 {align="center"}
@@ -38,22 +70,21 @@ The graphic below shows the `main` and `dev` branches along with some feature br
     * There are also feature branches for items like new pumps and new CGMs:
         * The feature branches typically spin off of `dev`, but if a `updates_dev_to_ . . .` branch is in work, it is merged into the feature branches as items get included
 
-#### Table of Active Branches
+### Table of Active Branches
 
-The table below lists active branches. Note that updates may occur and be announced in zulipchat a day or two before updates propogate to *LoopDocs*.
+The table below lists active branches. 
+
+* Note that updates may occur and be announced in zulipchat a day or two before updates propagate to *LoopDocs*
+* Anyone using a feature branch needs to be alert and check zulipchat regularly
+* For example, while preparing for v3.14.2, older feature branches were retired
+    * Check the [Table of Retired Branches](#table-of-retired-branches) to get the support you need.
 
 | <div style="width:140px"> branch | version # | <div style="width:140px">last updated | comments |
 |:--|:--|:--|:--|
-| main | 3.14.0 | 14 May 2026 | release |
-| dev | 3.14.0 | 14 May 2026 | code is currently the same as `main` |
-| [feat/dev-dana-medtrum](#feature-branch-dana-and-medtrum-support) <br>- SHA `638d351` | 3.14.0  | 14 May 2026 | - adds support for Dana and Medtrum pumps<br>  - SHA for DanaKit is `c544c42`<br>  - SHA for MedtrumKit is `6060747`<br>**Medtrum User Interface Redesigned** to be more like the Omnipod User Interac.<br>Several fixes added for MedtrumKit, not yet in DanaKit |
-| [feat/eversense](#feature-branch-eversense-support) <br>- SHA `059caf5` | 3.14.0  | 15 May 2026 | - adds experimental support for Eversense (includes Dana and Medtrum pumps support - same SHA as above)<br>- this branch is ready for use to evaluate and report back<br>  - SHA for Eversense is `fe322a6` |
-| [feat/omnipodkit](#feature-branch-omnipodkit-pump-manager)<br>- SHA `553bf36` | 3.14.0 | 15 May 2026| The new OmnipodKit pump manager, controls all Types of pods. Initially only the Eros and DASH pod types are available for feature branch testers<br>  - SHA for OmnipodKit is `9bf676e`<br>**Please read [Feature Branch: OmnipodKit Pump Manager](#feature-branch-omnipodkit-pump-manager)** |
-
-!!! important "Eversense Support"
-    The Eversense CGM is now supported by the *Loop* app in a feature branch. To simplify maintenance, the branch which supports Eversense also supports the two new pumps: Dana and Medtrum.
-
-    The branch which support Evensense E3 and E365 CGM is simply called `feat/eversense`.
+| main | 3.14.2 | 6 June 2026 | release |
+| dev | 3.14.2 | 5 June 2026 | identical to main |
+| `feat/all-managers`<br>- SHA `1b4718f` | 3.14.2 | 5 June 2026| This branch contains all the managers and is primarily for developers to use for testing<br>It also provides `DanaKit @ c544c42` support<br>**Please read** [Status for Dana Support](#status-for-dana-support)<br>**Please read** [Feature Branch: feat/all-managers](#feature-branch-featall-managers) |
+| `next-dev` | 3.15.0 | subject to rapid change | [PR 454](https://github.com/LoopKit/LoopWorkspace/pull/454)<br>[zulipchat: Loop next-dev Status](https://loop.zulipchat.com/#narrow/channel/144182-development/topic/Loop.20next-dev.20Status/with/600761707) |
 
 ??? question "What is SHA? (Click to Open/Close)"
     SHA-1 means Secure Hash Algorithm 1. This is used to generate an alphanumeric code to identify which version of a repository is used. 
@@ -61,6 +92,14 @@ The table below lists active branches. Note that updates may occur and be announ
     Each time you save a change to your&nbsp;<span translate="no">GitHub repository</span>, a unique SHA-1 is created. That identifier is used to tell *GitHub* a specific change that you want applied or identifies a specific version for that <code>repository</code>. These work for any compatible <code>fork</code> from the original&nbsp;<span translate="no">GitHub repository</span>.
 
     The SHA-1 20-character value is abbreviated as SHA and typically only the first 7 or 8 characters are presented to identify the commit for a particular repository.
+
+### Table of Retired Branches
+
+| Retired Branch |  Use Instead | Status Link |
+|:--|:--|:--|
+| feat/dev-dana-medtrum |For Medtrum, use `main`<br>For Dana, use `feat/all-managers` | [Status for Medtrum](#status-for-medtrum-support)<br>[Status for Dana](#status-for-dana-support) |
+| feat/eversense |  For Eversense, use `main` | [Status for Eversense](#status-for-eversense-support) |
+| feat/omnipodkit | Use `main` unless you are a developer<br>developers can use `feat/all-managers` |  [Feature Branch: feat/all-managers](#feature-branch-featall-managers) |
 
 ### How to Build Feature Branches
 
@@ -78,29 +117,16 @@ Use the page linked above to add the desired branch name (from the table above) 
 
 For Mac Xcode build, the lines you need to copy and paste into a Terminal window are explicitly provided below:
 
-``` { .bash .copy  title="Download and build the feat/omnipodkit branch" }
+``` { .bash .copy  title="Download and build the feat/all-managers branch" }
 /bin/bash -c "$(curl -fsSL \
   https://raw.githubusercontent.com/loopandlearn/lnl-scripts/main/BuildLoop.sh)" \
-   - feat/omnipodkit
+   - feat/all-managers
 ```
 
-``` { .bash .copy  title="Download and build the feat/dev-dana-medtrum branch" }
-/bin/bash -c "$(curl -fsSL \
-  https://raw.githubusercontent.com/loopandlearn/lnl-scripts/main/BuildLoop.sh)" \
-   - feat/dev-dana-medtrum
-```
-
-``` { .bash .copy title="Download and build the feat/eversense branch" }
-/bin/bash -c "$(curl -fsSL \
-  https://raw.githubusercontent.com/loopandlearn/lnl-scripts/main/BuildLoop.sh)" \
-   - feat/eversense
-```
 
 ### Version Number Plan
 
 Please see [`Loop` Version Numbering](releases.md#loop-version-numbering) for the current method for version numbering for the `main` and `dev` branches.
-
-The idea of having a feature branch is not new for the *Loop* app but hasn't been used for a few years. At this point, we have several feature branches.
 
 The version number in the feature branch will match either the `dev` branch version number or a work-in-progress update to the `dev` branch which uses the naming convention `update_dev_to_M.m.#`.
 
@@ -108,69 +134,42 @@ The version number in the feature branch will match either the `dev` branch vers
 * Each feature has an associated repository that contains the feature
     * When updates to the feature are added, the SHA for the feature branch and the SHA for the submodule(s) which support that feature will be reported in the table above and can be found by examining the LoopWorkspace repository for that feature branch
 
-### Feature Branch: OmnipodKit Pump Manager
+- - -
 
-You need to build the `feat/omnipodkit` branch if you want to test the new `All Omnipod Types` pump manager. Build instructions are found here: [How to Build Feature Branches](#how-to-build-feature-branches).
+### Status for Pod Keep Alive Support
 
-This pump manager comes with improved user interface and user experience for Omnipod Classic (Eros) and DASH pods including
+For those using iPhone 16 or 17e with Atlas DASH Pods, the keep alive support is available in the released code, `main`, v3.14.0 or later.
 
-* Some layout adjustments
-* Some new labels
-* Some reworked sub-menus with added information or features
-* WARNINGS
-    - no translations added yet so English only for the initial roll-out
-    - no pod-keep-alive function added yet
+- - -
 
-The next time you change a pod, delete the pump manager you are using and add a new pump. See [Change Pump Type](loop-3/add-pump.md#change-pump-type){: target="_blank" } for detailed instructions.
+### Status for Medtrum Support
 
-* Select `All Omnipod Types` as your new pump manager.
-* Go through the onboarding of selecting notifications and reminders and insulin type.
-* You will then be presented with a screen to select the type of pod. 
-* Choose the Classic (Eros) or DASH Pod type
+Medtrum support was added to the released code, `main`, v3.14.2 or later.
 
-The underyling control code should be the same, but we want more people testing it to ensure this works as well as the older pod managers. The developers have been using it on themselves before making this publicly available.
+- - -
 
-!!! warning "Do not use with iPhone 16 or 17e and Atlas pods"
-    The new OmnipodKit does not have the pod-keep-alive feature incorporated. For now, if you use an iPhone 16 (any model) or iPhone 17e and have Atlas pods (the newer version for DASH pods), stick with the old Omnipod DASH selection.
+### Status for Eversense Support
 
-!!! question "Why OmnipodKit?"
-    When the initial work to add DASH to the supported pumps was started in 2021, a completely separate pump submodule was created distinct from the Classic (Eros) pump submodule. In other words, OmniBLE handled DASH and OmniKit handled Eros.
+Eversense support was added to the released code, `main`, v3.14.2 or later.
 
-    A significant portion of the two repositories serve the same function. Whenever a fix or improvement was added to OmniBLE, it was duplicated and added to OmniKit. Having a universal pod manager saves significant developer resources.
+- - -
 
-    OmnipodKit provides the individual support needed for different `Pod Types` while using a single copy of code for most of the logic and user interface.
+### Status for Dana Support
 
-    The improvements that have been going on in the background landed in the new pump manager only - and were not replicated in the OmniKit or OmniBLE repositories.
+For Dana support, you must build a new feature branch, `feat/all-managers`. The old feature branches will be deleted without further warning.
 
-    This will be a significant time saver for developers moving forward for updating code and adding support for new types of pods.
-
-!!! tip "feat/omnipodkit supports other plugins"
-    For the convenience of the developers and testers, this feature branch, feat/omnipodkit, also supports the new pump and cgm managers that are found in the other feature branches.
-
-    In other words:
-
-    * Eversense is available as a CGM
-    * Dana and Medtrum are available as a pump, in addtion to OmnipodKit and all the older pump managers
-
-### Feature Branch: Pod Keep Alive Feature
-
-The feat/pod-keep-alive branch has been deleted. It was updated and incorporated into the released code. Please build the `main` branch over your existing app. All your selections will remain as you configured them when building the `feat/pod-keep-alive` branch.
-
-See [Pod Keep Alive Feature](../loop-3/omnipod.md#pod-keep-alive-feature){: target="_blank" }.
+* Build instructions are found here: [How to Build Feature Branches](#how-to-build-feature-branches).
+* See [Feature Branch: feat/all-managers](#feature-branch-featall-managers) for more information about the branch. 
+* Keep reading here for Dana specific status.
 
 
-### Feature Branch: Dana and Medtrum Support
-
-Anyone using Dana or Medtrum pumps must build one of these branches. The pump manager support is identical. The difference is the second one includes support for the Eversense CGM. Build instructions are found here: [How to Build Feature Branches](#how-to-build-feature-branches).
-
-* `feat/dev-dana-medtrum` 
-* `feat/eversense` 
-
-!!! important "New Pump Managers"
-    These are new Pump Managers and may have known or unknown bugs. Please only use a feature branch if you are prepared to follow along in zulipchat and are willing to help test and resolve issues. This is critical when using new pump managers.
+!!! important "New Managers"
+    The `feat/all-managers` branch is used to add new Pump Managers and CGM Managers which may have known or unknown bugs. Once the managers are deemed reliable, they are added to the `dev` branch and subsequently released. This branch contains new and old managers (like OmniBLE and OmniKit) for use by developers.
+    
+    Please only use a feature branch if you are prepared to follow along in zulipchat and are willing to help test and resolve issues. This is critical when using new pump managers.
 
     * Please ensure you have the latest version of a given branch by synching before you build:
-        * Browser Build: be sure you select `feat/dev-dana-medtrum` or `feat/eversense` branch
+        * Browser Build: be sure you select `feat/all-managers` branch
             * The Build Loop action automatically syncs your fork when building
             * Be sure to install the resultant build from *TestFlight* onto your phone
         * Mac-Xcode: you can update your clone or download a fresh copy
@@ -182,23 +181,11 @@ Anyone using Dana or Medtrum pumps must build one of these branches. The pump ma
     
     The behavior of your OS-AID system needs to properly handle bolus and temp basal rate events in progress if that communication is interrupted.  This can happen if someone walks away from their phone during a bolus or while a temp basal rate is in progress.
 
+    These issues were fixed in MedtrumKit and the lessons learned will be applied to DanaKit.
+
+    There are known issues for DanaKit, which is why that pump manager is not yet in the `dev` branch
+
     Please read the rest of this section to learn about how this might affect an older or current version of your OS-AID app.
-
-#### Recently Closed Issue for Medtrum
-
-!!! success "Medtrum Bluetooth Comms Loss Updated"
-
-    #### MedtrumKit - fixed on 29 April 2026
-
-    [MedtrumKit Issue 112](https://github.com/jbr7rr/MedtrumKit/issues/112) reported that MedtrumKit did not properly handle a Temp Basal Rate (TBR) event if BLE comms was lost at the time the TBR completed.
-
-    [MedtrumKit PR 118](https://github.com/jbr7rr/MedtrumKit/pull/118) provided an updated management of TBR providing accurate handling of TBR when BLE was interrupted and later restored.
-
-    #### MedtrumKit - fixed on 25 March 2026
-
-    [MedtrumKit Issue 92](https://github.com/jbr7rr/MedtrumKit/issues/92) reported that when the Medtrum moved out of Bluetooth range, the app reported an interrupted bolus when in fact the bolus continued. This led to underreported values for Active Insulin, also known as Insulin on Board (IOB).
-
-    [MedtrumKit Pull Request 93](https://github.com/jbr7rr/MedtrumKit/pull/93) fixed this issue.  Now if Bluetooth communication is lost, the pump manager relies on expected timing to continue the bolus progress display.  The bolus is not considered final until BLE is restored and the app is able to communicate with the pump.
 
 #### Open Issue for DanaKit
 
@@ -235,42 +222,61 @@ Anyone using Dana or Medtrum pumps must build one of these branches. The pump ma
 
 - - -
 
-### Feature Branch: Eversense Support
+### Feature Branch: feat/all-managers
 
-#### Recently Closed Issue for Eversense
+The `feat/all-managers` branch replaces several [retired feature branches](#table-of-retired-branches). If you need a feature branch for a Dana pump - you need to build this branch. Be sure to review the [Status For Dana Support](#status-for-dana-support) section.
 
-!!! success "Eversense Placement Guide updated"
+If you previously used a feature branch for Medtrum or Eversense support, you can switch to the `dev` branch.
 
-    #### EversenseKit - fixed on 30 April 2026
+!!! Question "What is different between `feat/all-managers` and `dev` branch"
+    There are several differences between `feat/all-managers` and `dev` branch.  For one thing, this branch has all the pump managers: OmniBLE, OmniKit, OmnipodKit, DanaKit, MedtrumKit and MinimedKit and the new CGM manager EversenseKit. When other new managers become available, they may be added here for testing.
 
-    [EversenseKit Issue 26](https://github.com/bastiaanv/EversenseKit/issues/26) reported that the placement guide graph was not updating when attaching the Transmitter over the sensor.
+    Keeping OmniBLE & OmniKit in this branch is useful for developers. Those pump managers were removed from `main` and `dev` branches (v3.14.2). We expect those managers will eventually be dropped from this branch, but only when the developers agree to do so.
 
-    [EversenseKit PR 30](https://github.com/bastiaanv/EversenseKit/pull/30) fixed the problem. The solution was to enable debug mode while using the placement guide and disable debug mode when done.
+    Because OmniBLE & OmniKit are present, a tester who comes in with a Pod attached to one of those managers stays with the manager. The automatic conversion to OmnipodKit, which happens with v3.14.2, does not happen with this branch. The tester has to manually change pump managers during a Pod change.
 
-There is a new feature branch available, `feat/eversense` which supports the Eversense E365 and E3 transmitters. In addition to Eversense support, this branch also has the same pump support as the `feat/dev-dana-medtrum` branch.
+#### Transition to OmnipodKit
 
-For anyone who tests this branch with Eversense, if there are issues with your use of Loop with Eversense please report in this [zulipchat channel](https://loop.zulipchat.com/#narrow/channel/144182-development/topic/Eversense.20CGM/with/569969251). 
+!!! important "Once you transition to OmnipodKit, stay with OmnipodKit"
+    The new unified Omnipod Pump Manager, OmnipodKit, is provided in v3.14.2 or newer.
 
-Be sure to include:
+    If you are running a Pod and you transition to the OmnipodKit Pump Manager, then any build you install on your phone should have OmnipodKit. If you need to downgrade to a build earlier than v3.14.2, do so after deactivating a Pod.
 
-* a description of your issue
-* your phone model and iOS version
-* your build method:
-    * Browser Build
-    * Mac-Xcode and include Xcode version
-* which version of code you are running (branch name and SHA)
-* share your Eversense logs (at bottom of the Loop Eversense screen)
 
-If you prefer to create an issue directly at the Eversense repo, create it here:
+The OmnipodKit pump manager comes with improved user interface and user experience for Omnipod Classic (Eros) and DASH pods including
 
-* [https://github.com/bastiaanv/EversenseKit/issues](https://github.com/bastiaanv/EversenseKit/issues)
+* Some layout adjustments
+* Some new labels
+* Some reworked sub-menus with added information or features
 
-> Note
+If you are running the `main` or `dev` branch - your Pod is automatically transitioned to OmnipodKit. You will notice the user interface is a little different. If you are running `feat/all-managers` branch, see [Manual transition with `feat/all-managers`](#manual-transition-with-featall-managers).
 
-> * This was tested using an E365 transmitter attached to a small vial containing a sensor in glucose solution
-> * This enabled testing the Eversense behavior with Loop on a test phone
-> * No testing with the E3 (3-month, 90-day) sensor has been performed
+One of the biggest things is that you can change Pod types between Pods without deleting the pump manager. That means all your configuration choices for desired notifications and type of Insulin are maintained when you change Pod Types. With this version of OmnipodKit, only Eros and DASH are supported.
 
+!!! question "Why OmnipodKit?"
+    When the initial work to add DASH to the supported pumps was started in 2021, a completely separate pump submodule was created distinct from the Classic (Eros) pump submodule. In other words, OmniBLE handled DASH and OmniKit handled Eros.
+
+    A significant portion of the two repositories serve the same function. Whenever a fix or improvement was added to OmniBLE, it was duplicated and added to OmniKit. Having a universal pod manager saves significant developer resources.
+
+    OmnipodKit provides the individual support needed for different `Pod Types` while using a single copy of code for most of the logic and user interface.
+
+    The improvements that have been going on in the background landed in the new pump manager only - and were not replicated in the OmniKit or OmniBLE repositories.
+
+    This will be a significant time saver for developers moving forward for updating code and adding support for new types of pods.
+
+#### Manual transition with `feat/all-managers`
+
+If you are running `feat/all-managers` branch, you need to take these steps to switch to using the new pump manager.
+
+The next time you change a pod, delete the pump manager you are using and add a new pump. See [Change Pump Type](../loop-3/add-pump.md#change-pump-type){: target="_blank" } for detailed instructions.
+
+* Select `All Omnipod Types` as your new pump manager.
+* Go through the onboarding of selecting notifications and reminders and insulin type.
+* You will then be presented with a screen to select the type of pod. 
+* Choose the Classic (Eros) or DASH Pod type
+
+
+- - -
 
 ## Older updates
 
