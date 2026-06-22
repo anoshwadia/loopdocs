@@ -108,7 +108,7 @@ pygments==2.20.0
     # via mkdocs-material
 pymdown-extensions==10.21.3
     # via mkdocs-material
-pypdf==6.10.2
+pypdf==6.13.0
     # via mkdocs-exporter
 python-dateutil==2.9.0.post0
     # via
@@ -140,7 +140,7 @@ typing-extensions==4.15.0
     # via
     #   beautifulsoup4
     #   pyee
-urllib3==2.6.3
+urllib3==2.7.0
     # via requests
 watchdog==6.0.0
     # via mkdocs
