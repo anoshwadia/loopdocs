@@ -42,7 +42,7 @@ Please read this entire page before using any version of *Loop* other than the r
 
 This section provides an overview of changes to `dev` compared to the current release: [`Loop v3.14.2`](releases.md#v3142-highlights){: target="_blank" }. 
 
-The current version of `dev` is v3.14.3. The differences with respect to `main` are found in [PR 459](https://github.com/LoopKit/LoopWorkspace/pull/459).
+The current version of `dev` is v3.14.4. The differences with respect to `main` are found in [PR 459](https://github.com/LoopKit/LoopWorkspace/pull/459) and  [PR 469](https://github.com/LoopKit/LoopWorkspace/pull/469).
 
 * Those who want to participate in the Open Beta for using Omnipod 5, should build the `dev` branch; it is also supported in the `next-dev` branch
 * Those who have been using feature branches for Medtrum or Eversense support can build the released code, which has support for both Medtrum Pumps and Eversense CGM
@@ -84,10 +84,9 @@ The table below lists active branches.
 | <div style="width:140px"> branch | version # | <div style="width:140px">last updated | comments |
 |:--|:--|:--|:--|
 | main | 3.14.2 | 6 June 2026 | release |
-| dev | 3.14.3 | 2 July 2026 | adds support for Omnipod 5<br>Please read [Status for Open Beta for Omnipod 5](#status-for-open-beta-for-omnipod-5)<br>See [PR 459](https://github.com/LoopKit/LoopWorkspace/pull/459) |
-| update_dev_to_3.14.4 | 3.14.4 | 20 July 2026 | work in progress for the next version<br>See [PR 469](https://github.com/LoopKit/LoopWorkspace/pull/469) |
-| `feat/all-managers`<br>- SHA `2f6b61e` | 3.14.4 | 20 July 2026| This branch contains all the managers and is primarily for developers to use for testing<br>It also provides `DanaKit @ c544c42` support<br>**Please read** [Status for Dana Support](#status-for-dana-support)<br>**Please read** [Feature Branch: feat/all-managers](#feature-branch-featall-managers) |
-| `next-dev` | 3.15.1 | subject to rapid change | [Status for `next-dev` Branch](#status-for-next-dev-branch)|
+| dev | 3.14.4 | 31 July 2026 | uses the *ble-heartbeat* method for OmnipodKit plus improves G7 Sensor drop-outs<br>adds support for Omnipod 5<br>Please read [Status for Open Beta for Omnipod 5](#status-for-open-beta-for-omnipod-5)<br>See [PR 459](https://github.com/LoopKit/LoopWorkspace/pull/459)<br>See [PR 469](https://github.com/LoopKit/LoopWorkspace/pull/469)  |
+| `feat/all-managers`<br>- SHA `7a35cf6` | 3.14.4 | 31 July 2026| This branch contains all the managers and is primarily for developers to use for testing<br>It also provides `DanaKit @ 2884c39` support<br>**Please read** [Status for Dana Support](#status-for-dana-support)<br>**Please read** [Feature Branch: feat/all-managers](#feature-branch-featall-managers) |
+| `next-dev` | 3.15.2 | subject to rapid change | [Status for `next-dev` Branch](#status-for-next-dev-branch)|
 
 ??? question "What is SHA? (Click to Open/Close)"
     SHA-1 means Secure Hash Algorithm 1. This is used to generate an alphanumeric code to identify which version of a repository is used. 
@@ -120,6 +119,12 @@ Use the page linked above to add the desired branch name (from the table above) 
 
 For Mac Xcode build, the lines you need to copy and paste into a Terminal window are explicitly provided below:
 
+``` { .bash .copy  title="Download and build the next-dev branch" }
+/bin/bash -c "$(curl -fsSL \
+  https://raw.githubusercontent.com/loopandlearn/lnl-scripts/main/BuildLoop.sh)" \
+   - next-dev
+```
+
 ``` { .bash .copy  title="Download and build the feat/all-managers branch" }
 /bin/bash -c "$(curl -fsSL \
   https://raw.githubusercontent.com/loopandlearn/lnl-scripts/main/BuildLoop.sh)" \
@@ -150,7 +155,7 @@ The document linked above does not include more recent updates which you find di
 !!! important "For Expert Testers"
     If you are willing to test using the `next-dev` branch of LoopWorkspace, this implementation provides a heartbeat from the Pod if the CGM does not have one.
     
-    It also operates the BLE Pods (DASH and Omnipod 5) in disconnected mode instead of always connected as was done earlier.
+    It also operates the BLE Pods (DASH and Omnipod 5) in disconnected mode instead of always connected as was done earlier; and with the updates found in interim version 3.15.2, it uses the *eager-connect* method. See [Table of OmnipodKit Versions](../faqs/omnipod-faqs.md#table-of-omnipodkit-versions){: target="_blank"} for more information.
     
     This new BLE management method needs people to test it and report if they find any issues.
 
@@ -177,17 +182,20 @@ The next-dev branch will eventually be released as *Loop* version 4. The preset 
 
 !!! warning "Use of Omnipod 5 Pods requires a CGM with a heartbeat"
     * Omnipod 5 code is experimental
-        * The implementation found the the `dev` branch does not provide a heartbeat at this time
+        * The initial implementation found older builds of the `dev` branch, v3.14.3, did not provide a heartbeat at this time
             * This means you rely on your CGM to wake up the app when it is in the background or the phone is locked
             * If your CGM does not supply a heartbeat, the app with stop automatically running when it is not open
-        * The implementation found in the `next-dev` branch does provide a heartbeat
-            * Read [Status for `next-dev` Branch](#status-for-next-dev-branch)
+    * These two branches are available which do provide a heartbeat for Omnipod 5 but are only for expert testers
+        * The `dev` branch uses the *ble-heartbeat* Bluetooth connection method
+        * The `next-dev` branch uses the *eager-connect* Bluetooth connection method
+        * See [Table of OmnipodKit Versions](../faqs/omnipod-faqs.md#table-of-omnipodkit-versions){: target="_blank"} for more information about Bluetooth connection methods
+
 
 Please read the open beta [Omnipod 5 FAQS](../faqs/omnipod-faqs.md#is-omnipod-5-available-for-open-beta-testing){: target="_blank" }.
 
 Support for Omnipod 5 is available in development branches. Please report any issues you have in the zulipchat channel for [Loop Open Beta for Omnipod 5](https://loop.zulipchat.com/#narrow/channel/144182-development/topic/Loop.20Open.20Beta.20for.20Omnipod.205/with/607418710) topic in zulipchat.
 
-* Include whether you are using the `dev` branch or `next-dev` branch of Loop
+* Include the branch of Loop you are using
 * If the problem you are having is not associated with Omnipod 5, please use the appropriate channel
     * [Loop-dev status](https://loop.zulipchat.com/#narrow/channel/144182-development/topic/Loop-dev.20Status/with/600775735) 
     * [Loop next-dev status](https://loop.zulipchat.com/#narrow/channel/144182-development/topic/Loop.20next-dev.20Status/with/604885611).
@@ -197,6 +205,10 @@ You can also create an [Issue](https://github.com/loopandlearn/OmnipodKit/issues
 ### Status for Pod Keep Alive Support
 
 For those using iPhone 16 or 17e with Atlas DASH Pods, the keep alive support is available in the released code, `main`, v3.14.0 or later.
+
+For experts, the new Bluetooth connection method, nicknamed *eager-connect*, is currently available for use with the `next-dev` branch, with interim version number 3.15.2 or higher. This needs testing by individuals who use an iPhone 16 or 17e with Atlas DASH pods.
+
+* If you test with `next-dev`, please try it without Pod Keep Alive and share your Loop Reports in zulipchat
 
 - - -
 
@@ -214,7 +226,7 @@ Eversense support was added to the released code, `main`, v3.14.2 or later.
 
 ### Status for Dana Support
 
-For Dana support, you must build a new feature branch, `feat/all-managers`. The old feature branches will be deleted without further warning.
+For Dana support, you must build a new feature branch, `feat/all-managers`.
 
 * Build instructions are found here: [How to Build Feature Branches](#how-to-build-feature-branches).
 * See [Feature Branch: feat/all-managers](#feature-branch-featall-managers) for more information about the branch. 
