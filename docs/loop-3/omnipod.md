@@ -2,16 +2,7 @@
 
 The information and user interface for all Omnipod Pods is the same, except Omnipod 5 and DASH Pods do not require a RileyLink compatible device. They communicate directly with the phone through Bluetooth.
 
-!!! warning "Omnipod 5 is in beta test"
-    Omnipod 5 Pods should only be tested by experienced users willing to build a development branch: 
-    
-    * LoopWorkspace `dev`
-    * LoopWorkspace `next-dev`
-
-    The timing for when Omnipod 5 is supported in these branches depends on when Pull Requests are merged.
-
-    * Please thoroughly read [Omnipod 5 Open Beta FAQs](../faqs/omnipod-faqs.md#is-omnipod-5-available-for-open-beta-testing){: target="_blank" } before attempting to use one of these branches.
-    * Please thoroughly read [Updates in dev](../version/development.md#updates-in-dev){: target="_blank" } before attempting to use one of these branches.
+!!! success "Omnipod 5 Pod support added to DASH and Classic Pods"
 
 - - -
 
@@ -300,16 +291,10 @@ At that point, you can scroll to the bottom of the Omnipod screen and select the
 If you select Switch pod type, you are taken to the [Switch Pod Type](#switch-pod-type) Selection screen
 
 * All of your configuration settings including Insulin brand are maintained when you switch to a different Pod Type
-
-> If you are an experienced tester running a development branch, you will see the Omnipod 5 Pod type as an option on the Pod Type screen.
-
-> * Be sure to read the [Omnipod 5 FAQs](../faqs/omnipod-faqs.md#is-omnipod-5-available-for-open-beta-testing){: target="_blank" } before choosing Omnipod 5
-
-
-If you are using a development branch and choose Omnipod 5 Pod Type and have not previously gotten a certificate, one will be automatically downloaded for you.
-
-* **This one-time step requires internet access**
-* Once a certificate is successfully downloaded, you will be taken to the [Pair Pod](#pair-pod) screen for Omnipod 5
+* The very first time you select an Omnipod 5 Pod, you must have **Internet access to download a security certificate**
+    * This is a one-time automatic step: the app says it will download the certificate, you tap Continue button and the rest is automatic
+    * Once downloaded, the certificate works for this app and this phone and you will not need Internet access for future Omnipod 5 Pods
+    * Once a certificate is successfully downloaded, you will be taken to the [Pair Pod](#pair-pod) screen for Omnipod 5
 
 If you already have the required certificate, selecting Omnipod 5 as a Pod Type takes you straight to the Pair Pod screen. If you scroll to the bottom of the Omnipod screen, you will see a green check mark on the [Omnipod 5 Support](#omnipod-5-support) row.
 
@@ -351,6 +336,18 @@ When you tap on the `Confidence Reminder` row, the graphic below is displayed.  
 
 The Silence Pod feature is new with version 3.4.x. This allows a user to tap on silence Pod to prevent any noises from the Pod, other than critical faults.
 
+!!! warning "Omnipod 5 Black Dot Pods cannot be Silenced"
+    There are new versions of Omnipod 5 Pods distributed starting in 2026. With release v3.14.8, there is an in-app warning if you are wearing a Black Dot pod.
+
+    * The box and each Pod cover has a black circle on upper right with "R1" in white font
+    * When used with the official Omnipod app, these allow a target as low as 100 mg/dL
+    * The programming for beeping patterns for the Pods has changed slightly with this version of firmware (Pod Details shows 12.0.2)
+    * The following alerts beep on the Pod and require you to acknowledge on the app even when Silence Pod is selected
+        * Pod expiration warning (unless you choose none)
+        * Pod expiration (72 hours)
+        * Pod insulin delivery stop warning (79 hours)
+        * Pod reservoir level warning (unless you choose none)
+
 What Silence Pod will not do:
 
 * This feature cannot change the "clicking" noise that comes from insulin delivery
@@ -374,6 +371,7 @@ When would you use Silence Pod:
 
 Caveats:
 
+* If you have "Black Dot" Omnipod 5 Pods - these cannot be completely silenced, see warning above
 * You must remember to disable Silence Pod if you want to hear Notifications and Confidence Reminders as Pod beeps in addition to alerts on your phone
 * The settings you have under Notifications and Confidence Reminders are not changed, the Pod beeps associated with them are simply silenced while Silence Pod is Enabled
 
@@ -430,10 +428,6 @@ You are likely to hear a Pod fault before Loop notices. If your phone is locked,
 
 Unlock your phone, open Loop, navigate to the Pod Status screen and use the slider to Deactivate Pod to stop the noise. The Pod fault - even if it does not show up in the HUD or the Pod Status screen, will be picked up by the process of sliding to Deactivate Pod. You can then view the Fault information in the [Previous Pod Details](#previous-pod) screen.
 
-#### Updates with Version 3.4.x
-
-The updates included with version 3.4.x make it easier to find the Pod fault, should one occur.
-
 The fault will appear on the Omnipod screen and more details will be shown when you tap on Replace Pod to arrive at the Deactivate screen. You can grab a quick screenshot on the Deactivate screen if desired.
 
 The fault information can still be found under [Previous Pod Details](#previous-pod) if you need to find it after you Deactivate the "screaming" Pod.
@@ -442,80 +436,80 @@ The fault information can still be found under [Previous Pod Details](#previous-
 
 ## Pod Keep Alive Feature
 
-No better solution has been found for dealing with the difficulty reconnecting Atlas DASJ Pods with iPhone 16 (all models) and iPhone 17e. Therefore, the features previously found just in the `feat/pod-keep-alive` branch of LoopWorkspace are part of the released code as of version 3.14.0.
-
-There is a new "Pod Keep Alive" option at the bottom of the "Omnipod DASH" screen. This is intended to assist users who have both an iPhone 16 (all models) or 17e and [DASH Pods with a InPlay BLE (Atlas) board](../faqs/omnipod-faqs.md#keep-alive-atlas-or-inplay-dash-pods){: target="_blank" }. Model 17 phones, except for the 17e, do not exhibit this problem. No action is taken automatically unless both these cases are detected to be true.
-
-It was tested for LoopWorkspace and Trio.
-
-The concept is by choosing one of the Pod Keep Alive choices, the app sends a getStatus to the Pod before the 3 minute disconnect happens. Therefore, so long as you and the Pod stay close to the phone, the Pod will be connected for any command (either manual or automatic) including bolus, temp basal, modify scheduled basal rates, suspend, or deactivate.
-
-The selection for Pod Keep Alive is found at the bottom of the Pod settings screen.
-
-The default value is Disabled. The graphic below shows the Pod Keep Alive screen that allows the user to choose an option.
-
-![Options available for Pod Keep Alive](img/omnible-keep-alive-options.svg){width="650"}
-{align="center"}
-
-There are 4 choices for Pod Keep Alive:
-
-1. [Disabled](#disabled) (default)
-2. [When Open](#when-open)
-3. [Silent Tune](#silent-tune)
-4. [RileyLink](#rileylink)
-
-### Disabled
-
-When Pod Keep Alive is disabled, the code behavior is unchanged from the nominal OmniBLE code.
-
-!!! warning "Automatic Change for iPhone 16 or 17e and Atlas DASH Pod"
-    If your app has Pod Keep Alive set to disabled and you have an **iPhone 16** or **iPhone 17e** and the Pod you just paired is an **InPlay (Atlas) Pod**, the configuration **automatically** switches to **When Open**. 
+!!! success "With v3.14.8, you can ignore Pod Keep Alive"
+    The v3.14.8 release uses the *eager-connect* method for Bluetooth connection which can connect even iPhone 16/17e phones to Atlas DASH Pods within a few seconds.
     
-    The Pod Keep Alive configuration remains at **When Open** until you change it manually.
+    All BLE Pods default to using the When Open mode. The other types of Pod Keep Alive are no longer necessary and the selections for them will probably be removed in the next release.
 
-All three criteria must be true or no automatic change to the setting takes place:
+!!! important "With v3.14.7, check for Pod Keep Alive settings on rebuild and Pod Type change"
+    The v3.14.7 release used the *ble-heartbeat* method for Bluetooth connection which did not resolve the issues with connecting iPhone 16/17e phones to Atlas DASH Pods. **Now that v3.14.8 is available - please update as soon as possible.**
 
-* iPhone 16 (any model) or iPhone 17e
-* pair a new Pod that is InPlay BLE (Atlas)
-* Pod Keep Alive is Disabled
+    * Your previous PKA selection is not maintained across the rebuild - be sure to check your settings if you use iPhone 16/17e
+    * Your PKA settings are not maintained across Pod Type changes - each time you return to DASH pods, check your settings if you use iPhone 16/17e
 
-Note that during the time from pair to insert, the app keeps the screen open and unlocked unless you manually lock it.
+### Pod Keep Alive for Older Versions
 
-This means you can take all the time you need between pair/prime and insert. As long as you don't manually lock the phone or move it out of range of the Pod, the Pod stays connected until you insert the cannula.
+!!! abstract "Pod Keep Alive for v3.14.0 through v3.14.7"
 
-Once the Pod is inserted, the phone auto-lock timing is restored to the value the user has selected.
+    The "Pod Keep Alive" option is found the bottom of the "Omnipod DASH" screen for v. This is intended to assist users who have both an iPhone 16 (all models) or 17e and [DASH Pods with a InPlay BLE (Atlas) board](../faqs/omnipod-faqs.md#keep-alive-atlas-or-inplay-dash-pods){: target="_blank" }. Model 17 phones, except for the 17e, do not exhibit this problem. No action is taken automatically unless both these cases are detected to be true.
 
-### When Open
+    The concept is by choosing one of the Pod Keep Alive choices, the app sends a getStatus to the Pod before the 3 minute disconnect happens. Therefore, so long as you and the Pod stay close to the phone, the Pod will be connected for any command (either manual or automatic) including bolus, temp basal, modify scheduled basal rates, suspend, or deactivate.
 
-When the app is open, it will send a getStatus to the Pod 2:40 (mm:ss) after the last Pod message was exchanged. This means the Pod does not disconnect from BLE and remains available to the phone.
+    The selection for Pod Keep Alive is found at the bottom of the Pod settings screen.
 
-This is true as long as the phone and Pod are in-range while the app is open with phone unlocked.
+    The default value for v3.14.0 through v3.14.7 is Disabled.
 
-This mode is primarily to help out people who just paired an Atlas Pod for the first time with an iPhone 16 or 17e. It is meant to keep the Pod connected to the phone until the cannula is inserted.
+    There are 4 choices for Pod Keep Alive:
 
-> Imagine - you just hit retry 5 times to get the Pod to pair and prime and then when it's time to insert the cannula, the Pod has disconnected because it was more than 3 minutes since the last message exchange.  Then you have to keep hitting retry until the insertion process finally starts. With When Open, the Pod stays connected through the entire process of pairing, priming and inserting so long as the user does not manually lock the phone or move to another app.
+    1. [Disabled](#disabled) (default)
+    2. [When Open](#when-open)
+    3. [Silent Tune](#silent-tune)
+    4. [RileyLink](#rileylink)
 
-**The user should choose with Silent Tune or RileyLink going forward if they want to have reliable communication between their iPhone 16/17e and an Atlas Pod.**
+    #### Disabled
 
-> If the Pod moves out of Bluetooth range, the Pod disconnects. With iPhone 16 or 17e it might take several seconds to minutes before the app reconnects to the Pod once it is back in range. This can cause disruptions until the reconnect happens.
+    When Pod Keep Alive is disabled, the code behavior is unchanged from the nominal OmniBLE code.
 
-### Silent Tune
+    !!! warning "Automatic Change for iPhone 16 or 17e and Atlas DASH Pod"
+        If your app has Pod Keep Alive set to disabled and you have an **iPhone 16** or **iPhone 17e** and the Pod you just paired is an **InPlay (Atlas) Pod**, the configuration **automatically** switches to **When Open**.
 
-A silent tune is played in the background which keeps the app alive even when the phone is locked. This will increase the battery usage on the phone.
+        The Pod Keep Alive configuration remains at **When Open** until you change it manually.
 
-While Silent Tune is selected, the app will send a getStatus to the Pod 2:40 (mm:ss) after the last Pod message was exchanged. This means the Pod does not disconnect from BLE and remains available for commands from the app so long as the phone and Pod stay within Bluetooth range.
+    All three criteria must be true or no automatic change to the setting takes place:
 
-> If the Pod moves out of Bluetooth range, the Pod disconnects. With iPhone 16 or 17e it might take several seconds to minutes before the app reconnects to the Pod once it is back in range. This can cause disruptions until the reconnect happens.
+    * iPhone 16 (any model) or iPhone 17e
+    * pair a new Pod that is InPlay BLE (Atlas)
+    * Pod Keep Alive is Disabled
 
-### RileyLink
+    Note that during the time from pair to insert, the app keeps the screen open and unlocked unless you manually lock it.
 
-For those who have a RileyLink (OrangeLink, EmaLink, etc), you can use that instead of the Silent Tune but you must keep the link with the phone.
+    This means you can take all the time you need between pair/prime and insert. As long as you don't manually lock the phone or move it out of range of the Pod, the Pod stays connected until you insert the cannula.
 
-While RileyLink is selected, the app is triggered by the RileyLink one minute heartbeat. The app will send a getStatus to the Pod 2:00 (mm:ss) after the last Pod message was exchanged. This means the Pod does not disconnect from BLE and remains available for commands from the app so long as the phone and Pod stay within Bluetooth range.
+    Once the Pod is inserted, the phone auto-lock timing is restored to the value the user has selected.
 
-> If the Pod moves out of Bluetooth range, the Pod disconnects. With iPhone 16 or 17e it might take several seconds to minutes before the app reconnects to the Pod once it is back in range. This can cause disruptions until the reconnect happens.
+    #### When Open
 
-> If the phone moves out of RileyLink range, then the app is not triggered by the RileyLink heartbeat and the Pod disconnects from BLE at the 3 minute cadence. With iPhone 16 or 17e it might take several seconds to minutes before the app reconnects to the Pod once it is back in range. This can cause disruptions until the reconnect happens.
+    When the app is open, it will send a getStatus to the Pod 2:40 (mm:ss) after the last Pod message was exchanged. This means the Pod does not disconnect from BLE and remains available to the phone.
+
+    This is true as long as the phone and Pod are in-range while the app is open with phone unlocked.
+
+    #### Silent Tune
+
+    A silent tune is played in the background which keeps the app alive even when the phone is locked. This will increase the battery usage on the phone.
+
+    While Silent Tune is selected, the app will send a getStatus to the Pod 2:40 (mm:ss) after the last Pod message was exchanged. This means the Pod does not disconnect from BLE and remains available for commands from the app so long as the phone and Pod stay within Bluetooth range.
+
+    > If the Pod moves out of Bluetooth range, the Pod disconnects. With iPhone 16 or 17e it might take several seconds to minutes before the app reconnects to the Pod once it is back in range. This can cause disruptions until the reconnect happens.
+
+    #### RileyLink
+
+    For those who have a RileyLink (OrangeLink, EmaLink, etc), you can use that instead of the Silent Tune but you must keep the link with the phone.
+
+    While RileyLink is selected, the app is triggered by the RileyLink one minute heartbeat. The app will send a getStatus to the Pod 2:00 (mm:ss) after the last Pod message was exchanged. This means the Pod does not disconnect from BLE and remains available for commands from the app so long as the phone and Pod stay within Bluetooth range.
+
+    > If the Pod moves out of Bluetooth range, the Pod disconnects. With iPhone 16 or 17e it might take several seconds to minutes before the app reconnects to the Pod once it is back in range. This can cause disruptions until the reconnect happens.
+
+    > If the phone moves out of RileyLink range, then the app is not triggered by the RileyLink heartbeat and the Pod disconnects from BLE at the 3 minute cadence. With iPhone 16 or 17e it might take several seconds to minutes before the app reconnects to the Pod once it is back in range. This can cause disruptions until the reconnect happens.
 
 - - -
 
@@ -537,11 +531,7 @@ The row is typically used by developers. It opens a new screen with a variety of
 
 ## Omnipod 5 Support
 
-> If you are an experienced tester running a development branch, you will see the Omnipod 5 Pod type as an option on the Pod Type screen.
-
-> * Be sure to read the [Omnipod 5 FAQs](../faqs/omnipod-faqs.md#is-omnipod-5-available-for-open-beta-testing){: target="_blank" } before choosing Omnipod 5
-
-To use Omnipod 5 Pods you must have a certificate installed on your phone. 
+To use Omnipod 5 Pods you must build released code v3.14.7 or newer, and have a certificate installed on your phone. 
 
 * Once you have a certificate, the *Omnipod 5 Support* row will show a green check mark
 
