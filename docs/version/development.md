@@ -25,6 +25,8 @@ The current released version of the *Loop* app is always in the `main` branch of
 The next version of the *Loop* app is developed using branches. 
 
 * The `dev` branch is used by the developers to push out changes for users to test before that code is released
+    * Updates to `dev` are made via PRs to LoopWorkspace and are announced in zulipchat
+        * You should only be on the `dev` branch if you are willing to be a tester, build frequently and pay close attention to each update
     * Sometimes there are breaking changes
         * A breaking change is when you can build the new branch over your existing app, but cannot go backwards without deleting your app from your phone
     * We are bringing in updates for Tidepool in a special branch `next-dev`
@@ -40,46 +42,49 @@ Please read this entire page before using any version of *Loop* other than the r
 
 ## Updates in `dev`
 
-This section provides an overview of changes to `dev` compared to the current release: [`Loop v3.14.9`](releases.md#v3149-highlights){: target="_blank" }. 
+This section provides a permanent link for the overview of changes to `dev` compared to the current release: [`Loop v3.14.11`](releases.md#v31411-highlights){: target="_blank" }.
 
-At this time, `dev` is identical to to `main`.
+The `dev` branch is subject to frequent updates. Follow along in zulipchat for information about those updates.
 
-* Those on the Dana pump must keep building the feature branch, `feat/all-managers`
+* Although the [Status for `dev` Branch](#status-for-dev-branch) is not necessarily updated with every commit to `dev`, it provides a table of updates to `dev` between releases with additional information as needed
+* For additional information, the commit history is found here: [LoopWorkspace dev branch commit history](https://github.com/LoopKit/LoopWorkspace/commits/dev/)
 
-Please check the [development channel in zulipchat](https://loop.zulipchat.com/#narrow/channel/144182-development) for notifications when an update to the `dev` branch is expected so you will be prepared. Do this **before** you install a `dev` build from TestFlight.
+Those on the Dana pump must keep building the feature branch, `feat/all-managers`, which is kept up-to-date with the `dev` branch.
 
 ### Branches
 
-In addition to the main and dev branches, which are tightly controlled and only updated through a formal pull request and approval process, there are also some feature and update branches. These branches are subject to more frequent updates, so users testing these branches should follow along in zulipchat for information.
+In addition to the main and dev branches, which are tightly controlled and only updated through a formal pull request and approval process, there are also some feature branches. These branches are subject to more frequent updates, so users testing these branches should follow along in zulipchat for information.
 
-* The `update_dev_to_M.m.#` is where the next version of dev is tested before becoming part of `dev` and later being released as `main`
-* The branches starting with `feat/` have one or more special features, like support for new pumps, CGM or the new universal pump manager for all types of Omnipods
+* Starting with `dev` branch at v3.14.10, we stopped using the `update_dev_to_M.m.#` interim branches
+    * Users have been forced to acknowledge they are on a `dev` branch for a while now
+    * Updates will be merged directly into `dev` and the version will be bumped one more time before releasing `dev` to `main`
+* The branches starting with `feat/` have one or more special features, like support for new pumps or CGM; they are kept up to date with changes in the `dev` branch
 * As mentioned earlier, there is also a `next-dev` branch for early adopters of what will eventually be Loop version 4, but is currently tagged as v3.15.x
 
-The graphic below shows the `main` and `dev` branches along with some feature branches and an update branch. This is a snapshot in time and no longer reflects the current status. Always check [Table of Active Branches](#table-of-active-branches).
+The graphic below shows the `main` and `dev` branches along with some feature branches. This is a snapshot in time. Always check [Table of Active Branches](#table-of-active-branches).
 
-> ![Active branches for LoopWorkspace](img/loop-development-branches.png ){width="750"}
+> ![Active branches for LoopWorkspace](img/loop-development-branches.png ){width="600"}
 {align="center"}
 
 
 ??? tip "Updates in Progress (Click to open/close)"
-    * Sometimes there is a work-in-progress branch, `update_dev_to_M.m.#` used to collect new items in preparation for the next `dev` branch. This allows people to test and comment on the updates before they land in the `dev` branch.
-    * There are also feature branches for items like new pumps and new CGMs:
-        * The feature branches typically spin off of `dev`, but if a `updates_dev_to_ . . .` branch is in work, it is merged into the feature branches as items get included
+    * There are feature branches for items like new pumps and new CGMs:
+        * The feature branches typically are kept up to date with the `dev` branch
 
 ### Table of Active Branches
 
 The table below lists active branches. 
 
-* Note that updates may occur and be announced in zulipchat a day or two before updates propagate to *LoopDocs*
+* Note that updates may occur and be announced in zulipchat before updates propagate to *LoopDocs*
 * Anyone using a feature branch needs to be alert and check zulipchat regularly
 
 | <div style="width:140px"> branch | version # | <div style="width:140px">last updated | comments |
 |:--|:--|:--|:--|
-| `main` | 3.14.9 | 05 Oct 2026 | [released code](releases.md#v3149-highlights){: target="_blank" } |
-| `dev` | 3.14.9 | 03 Oct 2026 | same as `main` |
-| `feat/all-managers`<br>- SHA `ee55586` | 3.14.9 | 03 Oct 2026| This branch matches latest updates for dev<br>It also provides `DanaKit @ e157a86` support<br>**Please read** [Status for Dana Support](#status-for-dana-support)<br>**Please read** [Feature Branch: feat/all-managers](#feature-branch-featall-managers) |
+| `main` | 3.14.11 | 24 Oct 2026 | [released code](releases.md#v31411-highlights){: target="_blank" } |
+| `dev` | 3.14.11 | expect `next-dev` to be merged here soon | [Status for `dev` Branch](#status-for-dev-branch) |
 | `next-dev` | 3.15.2 | subject to rapid change | [Status for `next-dev` Branch](#status-for-next-dev-branch)|
+| `feat/all-managers` | 3.14.10 | 22 Oct 2026| This branch matches latest updates for dev<br>It also provides `DanaKit @ eadb9fe` support<br>**Please read** [Status for Dana Support](#status-for-dana-support)<br>**Please read** [Feature Branch: feat/all-managers](#feature-branch-featall-managers) |
+| `feat/tandem-closed-beta` | 3.14.10 | subject to rapid change<br>must be invited<br>to build this branch | Expert testers may [join the closed beta](https://loop.zulipchat.com/#narrow/channel/144182-development/topic/Tandem.20Mobi.20-.20Closed.20Beta.20Testing/with/629511497)<br>Must have a Tandem Mobi to apply |
 
 ??? question "What is SHA? (Click to Open/Close)"
     SHA-1 means Secure Hash Algorithm 1. This is used to generate an alphanumeric code to identify which version of a repository is used. 
@@ -108,11 +113,16 @@ For Mac Xcode build, you can use the [regular build script](../build/build-app.m
 
 Please see [`Loop` Version Numbering](releases.md#loop-version-numbering) for the current method for version numbering for the `main` and `dev` branches.
 
-The version number in the feature branch will match either the `dev` branch version number or a work-in-progress update to the `dev` branch which uses the naming convention `update_dev_to_M.m.#`.
+- - -
 
-* In other words, the feature branch is up to date with other changes to `dev` or `update_dev_to_M.m.#` with the added support for the specific feature
-* Each feature has an associated repository that contains the feature
-    * When updates to the feature are added, the SHA for the feature branch and the SHA for the submodule(s) which support that feature will be reported in the table above and can be found by examining the LoopWorkspace repository for that feature branch
+### Status for `dev` Branch
+
+This section provides an overview of changes since the last release, if any, but may lag the current state of the `dev` branch.
+
+**WARNING**
+
+* **Coming soon**: the `next-dev` branch will be merged into the `dev` branch
+* If you don't want to test `next-dev` yet, be sure to switch to the `main` branch
 
 - - -
 
@@ -123,11 +133,6 @@ The document linked below provides an overview of updates brought from Tidepool 
 * [*Loop* DIY: What's new](https://github.com/LoopKit/LoopWorkspace/blob/next-dev/docs/loop-diy-whats-new.md)
 
 The document linked above does not include more recent updates which you find discussed in zulipchat and highlighted below. But the document does provides a solid basis for understanding the new features.
-
-!!! important "For Expert Testers"
-    If you are willing to test using the `next-dev` branch of LoopWorkspace, this implementation provides a heartbeat from the Pod if the CGM does not have one.
-    
-    It also operates the BLE Pods (DASH and Omnipod 5) in disconnected mode instead of always connected as was done earlier; and with the updates found in interim version 3.15.2, it uses the *eager-connect* method. See [Table of OmnipodKit Versions](../faqs/omnipod-faqs.md#table-of-omnipodkit-versions){: target="_blank"} for more information.
 
 !!! warning "Backward Compatibility is Limited"
     Once you build `next-dev` on your personal phone, you may run into issues trying to return to released code at this time.
@@ -140,7 +145,7 @@ The document linked above does not include more recent updates which you find di
 
 This is the open PR for `next-dev`: [PR 454](https://github.com/LoopKit/LoopWorkspace/pull/454)
 
-Please read [Status for Open Beta for Omnipod 5](#status-for-open-beta-for-omnipod-5) and [zulipchat: Loop next-dev Status](https://loop.zulipchat.com/#narrow/channel/144182-development/topic/Loop.20next-dev.20Status/with/600761707) 
+Please follow along in [zulipchat: Loop next-dev Status](https://loop.zulipchat.com/#narrow/channel/144182-development/topic/Loop.20next-dev.20Status/with/600761707) 
 
 #### Preset Behavior in *Loop* 4
 
@@ -170,25 +175,26 @@ If you have any trouble with Omnipod 5, or any of the Omnipod Types, report them
 
 ### Status for Pod Keep Alive Support
 
-!!! important "Omnipod Users: Update to v3.14.9"
-    There were important fixes to Bluetooth connection timing in v3.14.9.
+!!! important "Omnipod Users: Update to v3.14.11"
+    There were important fixes to Bluetooth connection timing in v3.14.11.
 
-    * The release of v3.14.9 fixed an issue with When Open for v3.14.8
-    * The combination of Eversense CGM (which wakes up the app every minute even while locked) and Omnipod Pods revealed an issue in v3.14.8 that is fixed in v3.14.9
+    * The release of v3.14.11 fixed an issue for iPhone 16/17e users of Atlas (InPlay) Pods and fixed an excessive delay before offering to discard a Pod that cannot be deactivated and improved fidelity of acknowledging alerts on Pods
+    * The combination of Eversense CGM (which wakes up the app every minute even while locked) and Omnipod Pods revealed an issue in v3.14.8 that is fixed in v3.14.11
         * In v3.14.8, the When Open would keep working while the phone was locked when the app woke up from the Eversense Bluetooth signal, even those the app was in the background
-        * This was fixed in v3.14.9 and another improvement to *eager-coneect* was added that speeds up reconnection to Pods
+        * This was fixed in v3.14.11 and another improvement to *eager-connect* was added that speeds up reconnection to Pods
     * The Eversense fixes are important for any pump type
-        * There were several issues in v3.14.9 that keep the Eversense CGM working through a variety of responses that previously caused glucose data to stop being provided
+        * There were several issues in v3.14.8 that kept the Eversense CGM working through a variety of responses that previously caused glucose data to stop being provided
+        * Eversense users need to update to v3.14.11 to enable newer Transmitters to connect properly
 
-!!! tip "Update to v3.14.9 for iPhone 16/17e with Atlas DASH Pods"
+!!! tip "Update to v3.14.11 for iPhone 16/17e with Atlas DASH Pods"
     If your phone model is a 16 or 17e and you use Atlas DASH Pods:
 
-    * Update to v3.14.9 or later for faster connection speed
+    * Update to v3.14.11 or later for faster connection speed
         * Note that while the Pod Keep Alive selection can still be modified, you should be able to leave it at the default value of When Open
         * This works for all iPhone and BLE Pod models
 
 
-The Pod Keep Alive code was completely revamped and cleaned up in v3.14.7 through v3.14.9.  See [OmnipodKit Information](#omnipodkit-information) for more details.
+The Pod Keep Alive code was completely revamped and cleaned up in v3.14.7 through v3.14.11.  See [OmnipodKit Information](#omnipodkit-information) for more details.
 
 - - -
 
@@ -208,10 +214,10 @@ Eversense support was added to the released code, `main`, v3.14.2 or later.
 
 For Dana support, you must build a new feature branch, `feat/all-managers`.
 
-!!! important "Build v3.14.9"
+!!! important "Build v3.14.11"
     There were some important fixes for connectivity in the latest feat/all-managers.
 
-    * If your build does not say v3.14.9, please rebuild
+    * If your build does not say v3.14.11, please rebuild
     * The earlier v3.14.7 version of feat/all-managers did not show the bolus progress display - that is fixed now
 
 * Build instructions are found here: [How to Build Feature Branches](#how-to-build-feature-branches).
@@ -220,7 +226,7 @@ For Dana support, you must build a new feature branch, `feat/all-managers`.
 
 
 !!! important "New Managers"
-    The `feat/all-managers` branch is used to add new Pump Managers and CGM Managers which may have known or unknown bugs. Once the managers are deemed reliable, they are added to the `dev` branch and subsequently released. This branch contains new and old managers (like OmniBLE and OmniKit) for use by developers.
+    The `feat/all-managers` branch is used to add new Pump Managers and CGM Managers which may have known or unknown bugs. Once the managers are deemed reliable, they are added to the `dev` branch and subsequently released.
     
     Please only use a feature branch if you are prepared to follow along in zulipchat and are willing to help test and resolve issues. This is critical when using new pump managers.
 
@@ -292,15 +298,15 @@ When you build the `main` or `dev` (v3.14.2 or newer) branch or `next-dev` (v3.1
 * Some new labels
 * Some reworked sub-menus with added information or features
 * Omnipod 5 Support provided along with Classic and DASH support
-    * Released version v3.14.7 or newer (please build the latest v3.14.9 for important updates)
+    * Released version v3.14.7 or newer (please build the latest v3.14.11 for important updates)
     * Starting with development versions v3.14.3
 
-!!! warning "Update to v3.14.9 or later"
-    The Pod Keep Alive feature was rewritten with various improvements and bug fixes implemented over the last few versions. Please update to v3.14.9 as soon as possible. 
+!!! warning "Update to v3.14.11 or later"
+    The Pod Keep Alive feature was rewritten with various improvements and bug fixes implemented over the last few versions. Please update to v3.14.11 as soon as possible. 
     
     Even if you do not use an iPhone 16/17e model with Atlas DASH Pods, it is still worth updating.
 
-    For those who do use an iPhone 16/17e model with Atlas DASH Pods, you will get better performance with v3.14.9 and should leave the Pod Keep Alive setting at the default value of "When Open".
+    For those who do use an iPhone 16/17e model with Atlas DASH Pods, you will get better performance with v3.14.11 and should leave the Pod Keep Alive setting at the default value of "When Open".
 
 One of the biggest things is that you can [Switch Pod Type](../loop-3/omnipod.md#switch-pod-type){: target="_blank" } between Pods without deleting the pump manager. That means all your configuration choices for desired notifications and type of Insulin are maintained when you change Pod Type. With the `main` (v3.14.2) branch, only Eros and DASH are supported. With the `dev` (3.14.3 or newer) or `next-dev` ( 3.15.0 and newer) branches, Eros, DASH and Omnipod 5 are all supported.
 
@@ -318,6 +324,62 @@ One of the biggest things is that you can [Switch Pod Type](../loop-3/omnipod.md
 - - -
 
 ## Older updates
+
+### Detailed updates from v3.14.9 to v3.14.11
+
+These updates were made in-place to the `dev` branch so there is not a single PR to be referenced.
+
+#### Summary of updates while preparing for v3.14.11
+
+| Date | # of commits | Summary |
+|:--|:-:|:--|
+| 11 Oct 2026 | 2 | Increment version number to v3.14.10 |
+| 12 Oct 2026 | 1 | Update support files for automated testing with CircleCI |
+| 12 Oct 2026 | 1 | Update OmnipodKit to bring in 3 fixes:<br>1. Deactivate Fix: Shorten time from 4 to less than 1 minute before  offering to Discard Pod in case of signal loss and update messages<br>2. Trio Eros Fix: Enable clean deletion of pump manager with Eros Pods<br>3. Alert Fix: automatic retry to clear Pod Beeping alerts if initial acknowledgement to pod was missed |
+| 14 Oct 2026 | 1 | Update OmnipodKit: <br>reduce the likelihood of 203 Faults for the combination of iPhone 16/17e Plus Atlas<br>see [Update to `eager-connect` for iPhone 16/17e Plus Atlas](#update-to-eager-connect-for-iphone-1617e-plus-atlas) |
+| 15 Oct 2026 | 1 | update LoopKit: share the Core Data model used by next-dev<br>- maintains next-dev information if user transitions to and from dev branch |
+| 17 Oct 2026 | 1 | Update LoopSupport: send analytics to ingest.loopkit.org<br>maintain our own storage prior to using Amplitude for analysis |
+| 21 Oct 2026 | 7 | Update EversenseKit, Loop, LoopKit, LoopOnboarding, LoopSupport, OmnipodKit<br>minimum deployment is iOS 17.6<br>implement Report a Problem method<br>update Pod Keep Alive language for OmnipodKit<br>fix certification issue for Eversense |
+| 22 Oct 2026 | 4 | Enable user to view the Diagnostic Report before sharing it<br>update translations<br>Bump version to 3.14.11 in preparation for release<br>modify translation flags |
+
+At this point, all commits were made to the `release/v3.14.11` branch. This was merged into `main` for the release.
+
+| Date | # of commits | Summary |
+|:--|:-:|:--|
+| 22 Oct 2026 | 2 | Bump version to 3.14.11 in preparation for release<br>modify translation flags |
+| 23 Oct 2026 | 1 | Update README |
+| 24 Oct 2026 | 1 | Restore the Loop Report name as the subject when sharing the Diagnostic Report via email |
+
+Refer to [LoopWorkspace dev branch commit history](https://github.com/LoopKit/LoopWorkspace/commits/dev/) for all commits.
+
+#### Update to `eager-connect` for iPhone 16/17e Plus Atlas
+
+This fix should reduce the likelihood of 203 Faults for the combination of iPhone 16/17e Plus Atlas DASH Pods.
+
+##### Overview
+
+Modify the *eager-connect* method for Bluetooth communication with Pods:
+
+* This modification affects the handling of iPhone 16/17e with Atlas Pods when the app is in the background or the phone locked; other iPhone/Pod combinations are not affected
+    * Before this change, the program manager was essentially keeping the 16/17e plus Atlas Pod Bluetooth in a *keep-connected* mode
+    * After this change, the program manager allows the Bluetooth connection to close once messages are completed just like it does for other iPhone / Pod combinations
+
+##### Background
+
+The Bluetooth connection method for Pods has undergone several revisions driven by both the increased incidence of 203 Faults for Atlas DASH Pods and the very slow connection for iPhone 16/17e with Atlas Pods.
+
+Loop Release v3.14.7 used the first modification from *keep-connected* to *ble-heartbeat* and was associated with a reduction in 203 Faults but did not provide relief for slow Bluetooth connection for users of iPhone 16/17e with Atlas Pods.
+
+Loop Release v3.14.8 and v3.14.9 used the second modification of *eager-connect* which did provide relief for slow Bluetooth connection for users of iPhone 16/17e with Atlas Pods, however, these implementations essentially kept the 16/17e plus Atlas combination always connected to Bluetooth, which we believe makes 203 faults more common.
+
+* We got several reports of the return of 203 Faults for users who updated from v3.14.7 to v3.14.8 or v3.14.9 for users of iPhone 16/17e with Atlas Pods
+* Using those Loop Reports, the modification to the OmnipodKit pump manager (see link below) was proposed and tested
+
+This update should provide the improvements for all iPhones and all Pod Types.
+
+This fix to OmnipodKit came into the pump manager with [OmnipodKit PR 190 (to `dev`)](https://github.com/loopandlearn/OmnipodKit/pull/190). It was also backported to `next-dev`.
+
+
 
 ### Updates from v3.14.0 to v3.14.2
 
